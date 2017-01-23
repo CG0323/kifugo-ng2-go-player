@@ -1,0 +1,28 @@
+.empty-black:hover {
+    fill: url(#black);
+    fill-opacity: 0.3;
+}
+
+.empty-white:hover {
+    fill: url(#white);
+    fill-opacity: 0.3;
+}
+
+.text-coordinate {
+    font: 200px Verdana, Helvetica, Arial, sans-serif;
+}
+
+.text-sequence-black {
+    font: 200px Verdana, Helvetica, Arial, sans-serif;
+    fill: #ffffff
+}
+
+.text-sequence-white {
+    font: 200px Verdana, Helvetica, Arial, sans-serif;
+    fill: #000000
+}
+
+.text-sequence-last {
+    font: 200px Verdana, Helvetica, Arial, sans-serif;
+    fill: #ff0000
+}

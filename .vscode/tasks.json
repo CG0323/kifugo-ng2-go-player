@@ -1,0 +1,121 @@
+{
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "args": ["run"],
+    "echoCommand": true,
+    "suppressTaskName": true,
+    "tasks": [
+        {
+          "taskName": "tslint",
+          "args": [ "run", "lint" ],
+          "problemMatcher": {
+            "owner": "tslint",
+            "fileLocation": [
+              "relative",
+              "${workspaceRoot}"
+            ],
+            "severity": "warning",
+            "pattern": {
+              "regexp": "^(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+              "message": 4
+            }
+          }
+        },
+        {
+            "taskName": "reinstall",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": false,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.desktop",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.desktop.windows",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.desktop",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.desktop.windows",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.ios",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.ios",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.ios.device",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.android",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.android",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "start.livesync.android.device",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": false
+        },
+        {
+            "taskName": "test",
+            "isBuildCommand": false,
+            "showOutput": "always",
+            "isWatching": true,
+            "isTestCommand": true
+        }
+    ]
+}
