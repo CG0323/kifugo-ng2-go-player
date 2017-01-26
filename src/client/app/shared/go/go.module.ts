@@ -7,7 +7,10 @@ import { RouterModule } from '@angular/router';
 
 // app
 import { GO_COMPONENTS } from './components/index';
-// import { GO_PROVIDERS } from './services/index';
+import { SlideMenuModule, ButtonModule,DataGridModule,MessagesModule} from 'primeng/primeng';
+import { GO_PROVIDERS } from './services/index';
+import { DirectoryEffects } from './index';
+import { EffectsModule } from '@ngrx/effects';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -19,12 +22,17 @@ import { GO_COMPONENTS } from './components/index';
     FormsModule,
     HttpModule,
     RouterModule,
+    MessagesModule,
+    SlideMenuModule,
+    ButtonModule,
+    DataGridModule,
+    EffectsModule.run(DirectoryEffects)
   ],
   declarations: [
     GO_COMPONENTS
   ],
   providers: [
-    // SAMPLE_PROVIDERS
+    GO_PROVIDERS
   ],
   schemas: [
     NO_ERRORS_SCHEMA,
@@ -35,7 +43,6 @@ import { GO_COMPONENTS } from './components/index';
   ]
 })
 export class GoModule {
-
   constructor(@Optional() @SkipSelf() parentModule: GoModule) {
     if (parentModule) {
       throw new Error('GoModule already loaded; Import in root module only.');

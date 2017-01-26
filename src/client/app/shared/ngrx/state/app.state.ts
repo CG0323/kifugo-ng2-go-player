@@ -41,14 +41,18 @@ import * as fromMultilingual from '../../i18n/index';
 import { IMultilingualState } from '../../i18n/index';
 import * as fromSample from '../../sample/index';
 import { ISampleState } from '../../sample/index';
+import * as fromGo from '../../go/index';
+import { IDirectoryState, IBoardState } from '../../go/index';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface IAppState {
-  i18n: fromMultilingual.IMultilingualState;
+  // i18n: fromMultilingual.IMultilingualState;
   sample: fromSample.ISampleState;
+  directory: fromGo.IDirectoryState;
+  board: fromGo.IBoardState;
 };
 
 /**
@@ -59,8 +63,10 @@ export interface IAppState {
  * the result from right to left.
  */
 const reducers = {
-  i18n: fromMultilingual.reducer,
-  sample: fromSample.reducer
+  // i18n: fromMultilingual.reducer,
+  sample: fromSample.reducer,
+  directory: fromGo.directoryReducer,
+  board: fromGo.boardReducer
 };
 
 const developmentReducer: ActionReducer<IAppState> = compose(storeFreeze, combineReducers)(reducers);
@@ -74,12 +80,24 @@ export function AppReducer(state: any, action: any) {
   }
 }
 
-export function getMultilingualState(state$: Observable<IAppState>): Observable<IMultilingualState> {
-  return state$.select(s => s.i18n);
-}
+// export function getMultilingualState(state$: Observable<IAppState>): Observable<IMultilingualState> {
+//   return state$.select(s => s.i18n);
+// }
 export function getNameListState(state$: Observable<IAppState>): Observable<ISampleState> {
   return state$.select(s => s.sample);
 }
+export function getDirectoryState(state$: Observable<IAppState>): Observable<IDirectoryState> {
+  return state$.select(s => s.directory);
+}
+export function getBoardState(state$: Observable<IAppState>): Observable<IBoardState> {
+  return state$.select(s => s.board);
+}
 
-export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
+// export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
 export const getNames: any = compose(fromSample.getNames, getNameListState);
+export const getMenuItems: any = compose(fromGo.getMenuItems, getDirectoryState);
+export const getProblemRaws: any = compose(fromGo.getProblemRaws, getDirectoryState);
+export const getGrid: any = compose(fromGo.getGrid, getBoardState);
+export const getTextMarkups: any = compose(fromGo.getTextMarkups, getBoardState);
+export const getTrMarkups: any = compose(fromGo.getTrMarkups, getBoardState);
+export const getMsgs: any = compose(fromGo.getMsgs, getBoardState);

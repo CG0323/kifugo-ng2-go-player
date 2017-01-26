@@ -1,5 +1,11 @@
 // app
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import { IAppState,getGrid,getTextMarkups,getTrMarkups,getMsgs } from '../../ngrx/index';
+import { Store } from '@ngrx/store';
+import { Observable} from 'rxjs/Observable';
+import { CoreService} from '../services/index'
+import { Message} from 'primeng/primeng'
+import { Markup} from '../models/index'
 
 @Component({
   moduleId: module.id,
@@ -12,11 +18,23 @@ import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 
 export class BoardComponent implements OnInit, OnDestroy {
     
-    dim: number = 19;                           // board dimension
-    lines = this.getLines(19);                  // lines for board grids
-    stars = this.getStars(19);                  // circles for board stars
-    grid: number[][] = this.createGrid(19);
-    constructor() {}
+    dim: number = 19;                           
+    lines = CoreService.getLines(19);                  
+    stars = CoreService.getStars(19);                  
+    staticGrid: number[][] = CoreService.createGrid();
+    coordinates : string[] = CoreService.getCoordinates();
+
+    public grid$: Observable<number[][]>;
+    public textMarkups$: Observable<Markup[]>;
+    public trMarkups$: Observable<Markup[]>;
+    public msgs$ : Observable<Message[]>;
+
+    constructor(private store: Store<IAppState>) {
+      this.grid$ = store.let(getGrid);
+      this.textMarkups$ = store.let(getTextMarkups);
+      this.trMarkups$ = store.let(getTrMarkups);
+      this.msgs$ = store.let(getMsgs);
+    }
     
     ngOnInit():void {
 
@@ -25,72 +43,31 @@ export class BoardComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
 
     }
-    
-    /**
-     * Helper to get lines of the board grid for svg drawing.
-     * @param dim: dimension
-     */    
-    getLines(dim: number): {a: number; b: number;}[] {
-        let lines = [];
-        let end = 500 * dim -240;
-        for (let i = 0; i < dim; i++) {
-            lines.push({a: 500 * i + 250, b: end});
-        }
-        return lines;
-    }
 
-        /**
-     * Helper to generate a dim*dim 2D array.
-     * @param dim: dimension
-     */
-    createGrid(dim: number): number[][] {
-        let grid = [];
-        for (let i = 0; i < dim; i++) {
-            grid[i] = [];
-            for (let j = 0; j < dim; j++) {
-                grid[i][j] = 0;
-            }
-        }
-        return grid;
+    onClick(i:number,j:number) {
+
     }
-    
-    /**
-     * Helper to get circles of the board stars for svg drawing.
-     * @param dim: dimension
-     */        
-    getStars(dim: number): {x: number; y: number;}[] {
-        let stars = [];
-        if (dim == 19) {
-            stars.push(
-                {x: 250 + 500 * 3, y: 250 + 500 * 3},
-                {x: 250 + 500 * 9, y: 250 + 500 * 3},
-                {x: 250 + 500 * 15, y: 250 + 500 * 3},
-                {x: 250 + 500 * 3, y: 250 + 500 * 9},
-                {x: 250 + 500 * 9, y: 250 + 500 * 9},
-                {x: 250 + 500 * 15, y: 250 + 500 * 9},
-                {x: 250 + 500 * 3, y: 250 + 500 * 15},
-                {x: 250 + 500 * 9, y: 250 + 500 * 15},
-                {x: 250 + 500 * 15, y: 250 + 500 * 15});
-        } else if (dim == 13) {
-            stars.push(
-                {x: 250 + 500 * 3, y: 250 + 500 * 3},
-                {x: 250 + 500 * 3, y: 250 + 500 * 9},
-                {x: 250 + 500 * 9, y: 250 + 500 * 3},
-                {x: 250 + 500 * 9, y: 250 + 500 * 9});
-        } else if (dim == 9) {
-            stars.push(
-                {x: 250 + 500 * 4, y: 250 + 500 * 4});
-        }
-        return stars;
-    } 
+  
     /**
      * Helper to convert a number to a letter.
      * @param num: a number >= 1 && <= 26
      */    
     num2letter(num: number): string {
         if(num >= 1 && num <= 26) {
-            return String.fromCharCode(64 + num);
+            return String.fromCharCode(64 + num) + num;
         }
         return "";
+    }
+
+    getTrianglePoints(markup: any): string{
+      var x0 = markup.x*500;
+      var y0 = 500*markup.y +500;
+      var x1 = markup.x*500 + 250;
+      var y1 = 500*markup.y;
+      var x2 = markup.x*500 + 500;
+      var y2 = 500*markup.y +500;
+
+      var result = x0 + ',' + y0 + ' ' + x1 + ',' + y1 + ' ' + x2 + ',' + y2;
+      return result;
     }
 }

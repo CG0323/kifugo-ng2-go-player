@@ -30,6 +30,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
+      { src: 'node-sgf-parser/node-sgf-parser.js', inject: 'libs'}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.

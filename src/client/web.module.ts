@@ -22,10 +22,12 @@ import { AnalyticsModule } from './app/shared/analytics/analytics.module';
 import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
 import { MultilingualEffects } from './app/shared/i18n/index';
 import { GoModule } from './app/shared/go/go.module';
-// import { NameListEffects } from './app/shared/sample/index';
+// import { DirectoryEffects } from './app/shared/go/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/shared/core/index';
+
+
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
@@ -73,7 +75,7 @@ export function cons() {
     StoreModule.provideStore(AppReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     // EffectsModule.run(MultilingualEffects),
-    // EffectsModule.run(NameListEffects)
+    // EffectsModule.run(DirectoryEffects)
   ],
   declarations: [
     APP_COMPONENTS
