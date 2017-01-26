@@ -34,11 +34,25 @@ export function boardReducer(
         stones: stones, msgs:msgs, textMarkups: textMarkups, trMarkups: trMarkups, status:status, currentNode:root
       });
     }
+
     case actions.ActionTypes.MOVE:{
       var move = <Move>action.payload;
       var stones:Stone[] = JSON.parse(JSON.stringify(state.stones))
       stones.push({position: move.x + ","+move.y, c: move.c});
-      return (<any>Object).assign({}, state, {stones:stones});
+      var nextNode = state.currentNode.children.find(n=>n.move.x === move.x && n.move.y === move.y);
+      var status:BoardStatus = BoardStatus.Enabled;
+      var msgs:Message[] = state.msgs.map(msg=>Object.assign({},msg));
+      console.log(nextNode);
+      if(!nextNode){
+        status = BoardStatus.Wrong;
+        msgs[0].severity = "error"
+        msgs.push({severity:"error", summary: "答题错误", detail:"落子错误，本题结束"});
+      }else if(nextNode.comment == "RIGHT"){
+        status = BoardStatus.Right;
+        msgs[0].severity = "success"
+        msgs.push({severity:"success", summary: "回答正确", detail:"太棒了"});
+      }
+      return (<any>Object).assign({}, state, {stones:stones, currentNode: nextNode, status:status, msgs:msgs});
     }
       
     default:
