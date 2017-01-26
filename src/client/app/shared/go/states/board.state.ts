@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Markup } from '../models/index';
+import { Markup,BoardStatus } from '../models/index';
 import { CoreService} from '../services/index';
 import { Message} from 'primeng/primeng';
 
@@ -9,7 +9,7 @@ export interface IBoardState {
   textMarkups:Markup[],
   trMarkups: Markup[],
   msgs: Message[],
-
+  status: BoardStatus
 }
 
 export const initialBoardState: IBoardState = {
@@ -17,6 +17,7 @@ export const initialBoardState: IBoardState = {
   textMarkups:<Markup[]>[],
   trMarkups: <Markup[]>[],
   msgs: <Message[]>[],
+  status: BoardStatus.Disabled
 };
 
 export function getGrid(state$: Observable<IBoardState>) {
@@ -33,6 +34,10 @@ export function getTrMarkups(state$: Observable<IBoardState>) {
 
 export function getMsgs(state$: Observable<IBoardState>) {
   return state$.select(state => state.msgs);
+}
+
+export function getStatus(state$: Observable<IBoardState>) {
+  return state$.select(state => state.status);
 }
 
 

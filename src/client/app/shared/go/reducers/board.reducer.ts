@@ -2,7 +2,7 @@ import { IBoardState, initialBoardState } from '../states/board.state';
 import * as actions from '../actions/board.action';
 import {CoreService} from '../services/index'
 import { Message} from 'primeng/primeng';
-import { Markup} from '../models/index';
+import { Markup, BoardStatus} from '../models/index';
 
 export function boardReducer(
     state: IBoardState = initialBoardState,
@@ -29,9 +29,9 @@ export function boardReducer(
         textMarkups = root.markup.filter(m=>m.type == "LB");
         trMarkups =  root.markup.filter(m=>m.type == "TR");
       }
-
+      var status = BoardStatus.Enabled;
       return (<any>Object).assign({}, state, {
-        grid: grid, msgs:msgs, textMarkups: textMarkups, trMarkups: trMarkups
+        grid: grid, msgs:msgs, textMarkups: textMarkups, trMarkups: trMarkups, status:status
       });
     default:
       return state;

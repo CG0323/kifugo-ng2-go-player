@@ -1,11 +1,11 @@
 // app
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import { IAppState,getGrid,getTextMarkups,getTrMarkups,getMsgs } from '../../ngrx/index';
+import { IAppState,getGrid,getTextMarkups,getTrMarkups,getMsgs,getStatus } from '../../ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
 import { CoreService} from '../services/index'
 import { Message} from 'primeng/primeng'
-import { Markup} from '../models/index'
+import { Markup, BoardStatus} from '../models/index'
 
 @Component({
   moduleId: module.id,
@@ -28,12 +28,20 @@ export class BoardComponent implements OnInit, OnDestroy {
     public textMarkups$: Observable<Markup[]>;
     public trMarkups$: Observable<Markup[]>;
     public msgs$ : Observable<Message[]>;
+    public status$: Observable<BoardStatus>;
+    private enabled:boolean;
+    private subscription;
 
     constructor(private store: Store<IAppState>) {
       this.grid$ = store.let(getGrid);
       this.textMarkups$ = store.let(getTextMarkups);
       this.trMarkups$ = store.let(getTrMarkups);
       this.msgs$ = store.let(getMsgs);
+      this.status$ = store.let(getStatus);
+
+      this.subscription = this.status$.subscribe(status=>{
+        this.enabled = status == BoardStatus.Enabled;
+      });
     }
     
     ngOnInit():void {
@@ -41,22 +49,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
     
     ngOnDestroy() {
-
+      this.subscription.unsubscribe();
     }
 
     onClick(i:number,j:number) {
 
-    }
-  
-    /**
-     * Helper to convert a number to a letter.
-     * @param num: a number >= 1 && <= 26
-     */    
-    num2letter(num: number): string {
-        if(num >= 1 && num <= 26) {
-            return String.fromCharCode(64 + num) + num;
-        }
-        return "";
     }
 
     getTrianglePoints(markup: any): string{

@@ -101,3 +101,4 @@ export const getGrid: any = compose(fromGo.getGrid, getBoardState);
 export const getTextMarkups: any = compose(fromGo.getTextMarkups, getBoardState);
 export const getTrMarkups: any = compose(fromGo.getTrMarkups, getBoardState);
 export const getMsgs: any = compose(fromGo.getMsgs, getBoardState);
+export const getStatus: any = compose(fromGo.getStatus, getBoardState);
