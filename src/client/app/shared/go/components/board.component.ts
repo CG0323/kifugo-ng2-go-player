@@ -1,12 +1,12 @@
 // app
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import { IAppState,getGrid,getTextMarkups,getTrMarkups,getMsgs,getStatus } from '../../ngrx/index';
+import { IAppState,getTextMarkups,getTrMarkups,getMsgs,getStatus,getStones } from '../../ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
 import { CoreService} from '../services/index'
 import { Message} from 'primeng/primeng'
-import { Markup, BoardStatus} from '../models/index'
-
+import { Markup, BoardStatus,Stone} from '../models/index'
+import * as board from '../actions/board.action';
 @Component({
   moduleId: module.id,
   selector: 'go-board',
@@ -31,9 +31,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     public status$: Observable<BoardStatus>;
     private enabled:boolean;
     private subscription;
+    private stoneSubscription;
+    private stones: Stone[];
 
     constructor(private store: Store<IAppState>) {
-      this.grid$ = store.let(getGrid);
       this.textMarkups$ = store.let(getTextMarkups);
       this.trMarkups$ = store.let(getTrMarkups);
       this.msgs$ = store.let(getMsgs);
@@ -42,6 +43,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.subscription = this.status$.subscribe(status=>{
         this.enabled = status == BoardStatus.Enabled;
       });
+      this.stoneSubscription = store.let(getStones).subscribe(stones=>{
+        this.stones = <Stone[]>stones;
+      })
     }
     
     ngOnInit():void {
@@ -50,10 +54,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     
     ngOnDestroy() {
       this.subscription.unsubscribe();
+      this.stoneSubscription.unsubscribe();
     }
 
     onClick(i:number,j:number) {
-
+      this.store.dispatch(new board.MoveAction({x:i,y:j,c:1}));
     }
 
     getTrianglePoints(markup: any): string{
@@ -66,5 +71,19 @@ export class BoardComponent implements OnInit, OnDestroy {
 
       var result = x0 + ',' + y0 + ' ' + x1 + ',' + y1 + ' ' + x2 + ',' + y2;
       return result;
+    }
+
+    getGridStatus(i:number,j:number):number {
+      var position = i + "," + j;
+      if(!this.stones){
+        return 0;
+      }else{
+        var temp = this.stones.filter(s=>s.position === position);
+        if(temp.length == 0){
+          return 0;
+        }else{
+          return temp[0].c;
+        }
+      }
     }
 }

@@ -34,8 +34,8 @@
         </text>
 
         <polygon *ngFor="let markup of trMarkups$ | async" [attr.points]="getTrianglePoints(markup)" style="fill:transparent;stroke:red;stroke-width:20" />
-        <svg xmlns="http://www.w3.org/2000/svg" *ngFor="let row of grid$ | async; let i = index" [attr.x]="i*500">
-            <svg xmlns="http://www.w3.org/2000/svg" *ngFor="let cur of row; let j = index" width="500" height="500" [attr.y]="j*500" [ngSwitch]="cur">
+        <svg xmlns="http://www.w3.org/2000/svg" *ngFor="let row of staticGrid; let i = index" [attr.x]="i*500">
+            <svg xmlns="http://www.w3.org/2000/svg" *ngFor="let cur of row; let j = index" width="500" height="500" [attr.y]="j*500" [ngSwitch]="getGridStatus(i,j)">
                 <circle *ngSwitchCase="1" class="black" cx="250" cy="250" r="245" fill="url(#black)"/>
                 <circle *ngSwitchCase="-1" class="white" cx="250" cy="250" r="245" fill="url(#white)"/>
                 <template [ngSwitchCase]="0">

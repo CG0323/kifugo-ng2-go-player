@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../core/utils/type';
 import { BOARD } from '../common/category.common';
-import { KNode } from '../models/index'
+import { KNode,Move } from '../models/index'
 
 /**
  * For each action type in an action group, make a simple
@@ -13,10 +13,12 @@ import { KNode } from '../models/index'
  */
 export interface IBoardActions {
   INIT: string;
+  MOVE: string;
 }
 
 export const ActionTypes: IBoardActions = {
   INIT: type(`${BOARD} Init`),
+  MOVE: type(`${BOARD} Move`)
 };
 
 /**
@@ -31,6 +33,11 @@ export class InitAction implements Action {
   constructor(public payload: KNode) { }
 }
 
+export class MoveAction implements Action {
+  type = ActionTypes.MOVE;
+  constructor(public payload: Move) { }
+}
+
 
 /**
  * Export a type alias of all actions in this action group
@@ -38,3 +45,4 @@ export class InitAction implements Action {
  */
 export type Actions
   = InitAction
+  |MoveAction

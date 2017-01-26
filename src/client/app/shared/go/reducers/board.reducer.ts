@@ -2,21 +2,21 @@ import { IBoardState, initialBoardState } from '../states/board.state';
 import * as actions from '../actions/board.action';
 import {CoreService} from '../services/index'
 import { Message} from 'primeng/primeng';
-import { Markup, BoardStatus} from '../models/index';
+import { Markup, BoardStatus, Move, KNode, Stone} from '../models/index';
 
 export function boardReducer(
     state: IBoardState = initialBoardState,
     action: actions.Actions
 ): IBoardState {
   switch (action.type) {
-    case actions.ActionTypes.INIT:
-      var root = action.payload;
+    case actions.ActionTypes.INIT:{
+      var root = <KNode>action.payload;
       var setup = root.setup;
-      var grid = CoreService.createGrid();
+      var stones:Stone[] = [];
       if(setup){
         for(var i = 0; i < setup.length; i++){
           var move = setup[i];
-          grid[move.x][move.y] = move.c;
+          stones.push({position: move.x + ","+move.y, c: move.c});
         }
       }
       var msgs:Message[] = [];
@@ -31,8 +31,16 @@ export function boardReducer(
       }
       var status = BoardStatus.Enabled;
       return (<any>Object).assign({}, state, {
-        grid: grid, msgs:msgs, textMarkups: textMarkups, trMarkups: trMarkups, status:status
+        stones: stones, msgs:msgs, textMarkups: textMarkups, trMarkups: trMarkups, status:status, currentNode:root
       });
+    }
+    case actions.ActionTypes.MOVE:{
+      var move = <Move>action.payload;
+      var stones:Stone[] = JSON.parse(JSON.stringify(state.stones))
+      stones.push({position: move.x + ","+move.y, c: move.c});
+      return (<any>Object).assign({}, state, {stones:stones});
+    }
+      
     default:
       return state;
   }
