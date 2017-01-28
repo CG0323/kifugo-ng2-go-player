@@ -30,3 +30,15 @@ export function getProblemRaws(state$: Observable<IDirectoryState>) {
 export function getCurrentProblemRaw(state$: Observable<IDirectoryState>) {
   return state$.select(state => state.currentProblem);
 }
+
+export function getIsFirstProblem(state$: Observable<IDirectoryState>) {
+  return state$.select(state => (!(state.currentProblem) || state.currentProblem.index == 0));
+}
+
+export function getIsLastProblem(state$: Observable<IDirectoryState>) {
+  return state$.select(state => (!(state.currentProblem) || (state.currentProblem.index == state.problemRaws.length - 1)));
+}
+
+export function getIsNotInProblem(state$: Observable<IDirectoryState>) {
+  return state$.select(state => !(state.currentProblem));
+}

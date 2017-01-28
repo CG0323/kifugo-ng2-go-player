@@ -11,7 +11,7 @@ import { DirectoryService, CoreService } from '../services/index';
 import * as directory from '../actions/directory.action';
 import * as board from '../actions/board.action';
 import {KNode,ProblemRaw} from '../models/index'
-import {getCurrentProblemRaw} from '../../ngrx/index'
+import {getCurrentProblemRaw,getProblemRaws} from '../../ngrx/index'
 
 @Injectable()
 export class DirectoryEffects {
@@ -40,6 +40,13 @@ export class DirectoryEffects {
     })
     // nothing reacting to failure at moment but you could if you want (here for example)
     .catch(() => Observable.of(new directory.ProblemsLoadingFailedAction()));
+  
+    @Effect() problemLoaded$: Observable<Action> = this.actions$
+    .ofType(directory.ActionTypes.PROBLEMS_LOADED)
+    .withLatestFrom(this.store.let(getProblemRaws))
+    .map(([action,problemRaws]) => {
+      return new directory.SelectProblemAction(problemRaws[0]);
+    })
 
   @Effect() selectProblem$: Observable<Action> = this.actions$
     .ofType(directory.ActionTypes.SELECT_PROBLEM)
@@ -49,9 +56,9 @@ export class DirectoryEffects {
       return new board.InitAction(root);
     })
   
-  @Effect() nextProblem$: Observable<Action> = this.actions$
-    .ofType(directory.ActionTypes.NEXT_PROBLEM)
-    .delay(400)
+  
+  @Effect() loadProblem$: Observable<Action> = this.actions$
+    .ofType(directory.ActionTypes.NEXT_PROBLEM, directory.ActionTypes.RELOAD_PROBLEM, directory.ActionTypes.PREVIOUS_PROBLEM)
     .withLatestFrom(this.store.let(getCurrentProblemRaw))
     .map(([action,problemRaw]) => {
       if(problemRaw){

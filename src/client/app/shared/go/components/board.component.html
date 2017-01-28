@@ -1,6 +1,10 @@
-<p-messages [value]="msgs$ | async" [closable]="false"></p-messages>
+<div>
+    <p-messages [value]="msgs$ | async" [closable]="false"></p-messages>
+</div>
 
-<svg xmlns="http://www.w3.org/2000/svg/" [attr.width]="800" [attr.height]="800" [attr.viewBox]="'0 0 '+(dim*500+1250)+' '+(dim*500+1250)" class="img-responsive">  
+
+<svg xmlns="http://www.w3.org/2000/svg/" width="90%" height="90%" [attr.viewBox]="'0 0 '+(dim*500+1250)+' '+(dim*500+1250)" class="img-responsive"> 
+<!--<svg xmlns="http://www.w3.org/2000/svg/" [attr.width]="800" [attr.height]="800" [attr.viewBox]="'0 0 '+(dim*500+1250)+' '+(dim*500+1250)" class="img-responsive">  -->
       
     <svg xmlns="http://www.w3.org/2000/svg/" x="625" y="0">
         <text class="text-coordinate" *ngFor="let row of staticGrid; let k = index" [attr.x]="500*k+250" y="250" text-anchor="middle" alignment-baseline="central">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { MenuItem, SlideMenuModule } from 'primeng/primeng';
-import { IAppState, getMenuItems,getProblemRaws } from '../../ngrx/index';
+import { IAppState, getMenuItems,getProblemRaws, getIsFirstProblem, getIsLastProblem,getIsNotInProblem } from '../../ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
 import * as directory from '../actions/directory.action';
@@ -9,19 +9,23 @@ import { ProblemRaw } from '../models/index'
 
 @Component({
   moduleId: module.id,
-  selector: 'go-directory',
-  templateUrl: 'directory.component.html',
+  selector: 'go-control',
+  templateUrl: 'control.component.html',
   styleUrls: [
-    'directory.component.css',
+    'control.component.css',
   ],
 })
 
 
 
-export class DirectoryComponent implements OnInit, OnDestroy {
+export class ControlComponent implements OnInit, OnDestroy {
       @ViewChild('menu') menu;
       private directorySubscription;
       private problemsSubscription;
+      private currentProblemSubscription;
+      private isFirst$:Observable<boolean>;
+      private isLast$: Observable<boolean>;
+      private isNotInProblem$: Observable<boolean>;
       private menuItems:MenuItem[];
       public problems$: Observable<ProblemRaw[]>;
       constructor(private store: Store<IAppState>) {
@@ -30,6 +34,9 @@ export class DirectoryComponent implements OnInit, OnDestroy {
             this.menuItems = items.map(item=>this.appendCommand(item));
            })
          this.problems$ = store.let(getProblemRaws);
+         this.isFirst$ = store.let(getIsFirstProblem);
+         this.isLast$ = store.let(getIsLastProblem);
+         this.isNotInProblem$ = store.let(getIsNotInProblem);
     }
     
     ngOnInit():void {
@@ -44,7 +51,6 @@ export class DirectoryComponent implements OnInit, OnDestroy {
       if(item.id){
         item.command = (event) => {
           this.store.dispatch(new directory.SelectDirectoryAction(event.item.id));
-          this.menu.toggle();
         };
         return item;
       }
@@ -61,6 +67,19 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     selectProblem(problem:ProblemRaw){
       this.store.dispatch(new directory.SelectProblemAction(problem));
     }
+
+    redoProblem(){
+      this.store.dispatch(new directory.ReloadProblemAction());
+    }
+
+    nextProblem(){
+      this.store.dispatch(new directory.NextProblemAction());
+    }
+
+    previousProblem(){
+      this.store.dispatch(new directory.PreviousProblemAction());
+    }
+
 }
 
 

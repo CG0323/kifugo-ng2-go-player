@@ -45,3 +45,5 @@ export function getStones(state$: Observable<IBoardState>) {
 
 
 
+
+

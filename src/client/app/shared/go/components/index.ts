@@ -1,9 +1,9 @@
 import { BoardComponent } from './board.component';
-import { DirectoryComponent } from './directory.component';
+import { ControlComponent } from './control.component';
 
 export const GO_COMPONENTS: any[] = [
   BoardComponent,
-  DirectoryComponent
+  ControlComponent
 ];
 
 export * from './board.component';

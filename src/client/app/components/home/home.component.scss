@@ -1,34 +1,55 @@
 :host {
-  display: block;
-  padding: 0 16px;
+    display: block;
+    padding: 0 16px;
 }
 
 input {
-  width: 250px;
+    width: 250px;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0 0 0 8px;
+    list-style-type: none;
+    padding: 0 0 0 8px;
 }
 
 .smile {
-  background: url("./assets/svg/smile.svg");
-  height: 48px;
-  width: 48px;
-  display: inline-block;
-  transform: scale(0.6);
-  margin-top: -25px;
-  position: relative;
-  top: 16px;
+    background: url("./assets/svg/smile.svg");
+    height: 48px;
+    width: 48px;
+    display: inline-block;
+    transform: scale(0.6);
+    margin-top: -25px;
+    position: relative;
+    top: 16px;
 }
 
 a.link {
-  color: #00e;
-  cursor: pointer;
-  text-decoration: underline;
+    color: #00e;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 a.link:hover {
-  color: #f00;
+    color: #f00;
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3em;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-grow: 1.2;
+    max-width: 900px;
+    min-width: 400px;
+}
+
+.control {
+    max-width: 150px;
+    flex-grow: 1;
+    margin-left: 2em;
 }

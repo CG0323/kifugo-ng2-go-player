@@ -103,3 +103,6 @@ export const getTrMarkups: any = compose(fromGo.getTrMarkups, getBoardState);
 export const getMsgs: any = compose(fromGo.getMsgs, getBoardState);
 export const getStatus: any = compose(fromGo.getStatus, getBoardState);
 export const getStones: any = compose(fromGo.getStones, getBoardState);
+export const getIsFirstProblem: any = compose(fromGo.getIsFirstProblem, getDirectoryState);
+export const getIsLastProblem: any = compose(fromGo.getIsLastProblem, getDirectoryState);
+export const getIsNotInProblem: any = compose(fromGo.getIsNotInProblem, getDirectoryState);

@@ -32,6 +32,16 @@ export function directoryReducer(
         currentProblem: nextProblem
       });
     }
+    case actions.ActionTypes.PREVIOUS_PROBLEM:{
+      var previousProblem = null;
+      var previousIndex = state.currentProblem.index - 1;
+      if(previousIndex >= 0){
+        previousProblem = state.problemRaws[previousIndex];
+      }
+      return (<any>Object).assign({}, state, {
+        currentProblem: previousProblem
+      });
+    }
 
     default:
       return state;

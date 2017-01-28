@@ -17,6 +17,7 @@ export class BoardEffects {
 
   @Effect() move$: Observable<Action> = this.actions$
     .ofType(board.ActionTypes.MOVE)
+    .delay(400)
     .withLatestFrom(this.store.let(getStatus))
     .map(([action,status]) => {
       if(status == BoardStatus.Right){

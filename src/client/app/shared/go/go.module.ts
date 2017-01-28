@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 // app
 import { GO_COMPONENTS } from './components/index';
-import { SlideMenuModule, ButtonModule,DataGridModule,MessagesModule} from 'primeng/primeng';
+import { SlideMenuModule, ButtonModule,DataGridModule,MessagesModule,TieredMenuModule} from 'primeng/primeng';
 import { GO_PROVIDERS } from './services/index';
 import { DirectoryEffects,BoardEffects } from './index';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
     RouterModule,
     MessagesModule,
     SlideMenuModule,
+    TieredMenuModule,
     ButtonModule,
     DataGridModule,
     EffectsModule.run(DirectoryEffects),

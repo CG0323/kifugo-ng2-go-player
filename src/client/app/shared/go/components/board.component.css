@@ -31,3 +31,7 @@
     font: 600px Verdana, Helvetica, Arial, sans-serif;
     fill: #ff0000
 }
+
+.board {
+    align-self: center;
+}

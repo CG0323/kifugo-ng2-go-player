@@ -21,6 +21,8 @@ export interface IDirectoryActions {
   PROBLEMS_LOADING_FAILED: string;
   SELECT_PROBLEM: string;
   NEXT_PROBLEM: string;
+  PREVIOUS_PROBLEM: string;
+  RELOAD_PROBLEM: string;
   EMPTY: string;
 }
 
@@ -33,6 +35,8 @@ export const ActionTypes: IDirectoryActions = {
   PROBLEMS_LOADING_FAILED: type(`${DIRECTORY} Problems Loading Failed`),
   SELECT_PROBLEM: type(`${DIRECTORY} Select Problem`),
   NEXT_PROBLEM: type(`${DIRECTORY} Next Problem`),
+  PREVIOUS_PROBLEM: type(`${DIRECTORY} Previous Problem`),
+  RELOAD_PROBLEM: type(`${DIRECTORY} Reload Problem`),
   EMPTY: type(`${DIRECTORY} Empty`),
 };
 
@@ -84,6 +88,16 @@ export class NextProblemAction implements Action {
   payload: string = null;
 }
 
+export class PreviousProblemAction implements Action {
+  type = ActionTypes.PREVIOUS_PROBLEM;
+  payload: string = null;
+}
+
+export class ReloadProblemAction implements Action {
+  type = ActionTypes.RELOAD_PROBLEM;
+  payload: string = null;
+}
+
 export class EmptyAction implements Action {
   type = ActionTypes.EMPTY;
   payload: string = null;
@@ -102,4 +116,6 @@ export type Actions
   | ProblemsLoadingFailedAction
   | SelectProblemAction
   | NextProblemAction
+  | PreviousProblemAction
+  | ReloadProblemAction
   | EmptyAction

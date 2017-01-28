@@ -1,0 +1,22 @@
+<div class="container">
+    <p-tieredMenu #menu [model]="menuItems" [popup]="true">
+    </p-tieredMenu>
+    <div class="item">
+        <button #btn type="button" pButton icon="fa fa-list" label="选择题库" (click)="menu.toggle($event)"></button>
+    </div>
+    <div class="item">
+        <button type="button" [disabled]="isFirst$|async" pButton icon="fa fa-backward" label="上一道題" (click)="previousProblem()"></button>
+    </div>
+    <div class="item">
+        <button type="button" [disabled]="isNotInProblem$|async" pButton icon="fa fa-refresh" label="重做本題" (click)="redoProblem()"></button>
+    </div>
+    <div class="item">
+        <button type="button" [disabled]="isLast$|async" pButton icon="fa fa-forward" label="下一道題" (click)="nextProblem()"></button>
+    </div>
+</div>
+
+<!--<div class="ui-g">
+    <div class="ui-g-3" *ngFor="let problem of problems$ | async; let i = index">
+        <a class="problem gradient" (click)="selectProblem(problem)">{{i+1}}</a>
+    </div>
+</div>-->
