@@ -30,6 +30,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     public msgs$ : Observable<Message[]>;
     public status$: Observable<BoardStatus>;
     private enabled:boolean;
+    private correct:boolean;
+    private wrong:boolean;
     private subscription;
     private stoneSubscription;
     private stones: Stone[];
@@ -42,6 +44,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 
       this.subscription = this.status$.subscribe(status=>{
         this.enabled = status == BoardStatus.Enabled;
+        this.correct = status == BoardStatus.Right;
+        this.wrong = status == BoardStatus.Wrong;
       });
       this.stoneSubscription = store.let(getStones).subscribe(stones=>{
         this.stones = <Stone[]>stones;

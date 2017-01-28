@@ -11,7 +11,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
   FONTS_DEST = `${this.APP_DEST}/fonts`;
   FONTS_SRC = ['node_modules/font-awesome/fonts/**'];
-  PRIME_NG_THEME = 'bootstrap';
+  PRIME_NG_THEME = 'omega';
   CSS_IMAGE_DEST = `${this.CSS_DEST}/images`;
   CSS_IMAGE_SRC = ['node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/images/**'];
   THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
@@ -28,7 +28,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       ...this.NPM_DEPENDENCIES,
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       { src: 'primeng/resources/primeng.min.css', inject: true },
-      { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
+      { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
       { src: 'node-sgf-parser/node-sgf-parser.js', inject: 'libs'}
     ];

@@ -10,7 +10,8 @@ import { Observable } from 'rxjs/Observable';
 import { DirectoryService, CoreService } from '../services/index';
 import * as directory from '../actions/directory.action';
 import * as board from '../actions/board.action';
-import {KNode} from '../models/index'
+import {KNode,ProblemRaw} from '../models/index'
+import {getCurrentProblemRaw} from '../../ngrx/index'
 
 @Injectable()
 export class DirectoryEffects {
@@ -46,6 +47,20 @@ export class DirectoryEffects {
       let problemRaw = action.payload;
       let root = this.coreService.parseSgf(problemRaw.sgf);
       return new board.InitAction(root);
+    })
+  
+  @Effect() nextProblem$: Observable<Action> = this.actions$
+    .ofType(directory.ActionTypes.NEXT_PROBLEM)
+    .delay(400)
+    .withLatestFrom(this.store.let(getCurrentProblemRaw))
+    .map(([action,problemRaw]) => {
+      if(problemRaw){
+        let root = this.coreService.parseSgf((<ProblemRaw>problemRaw).sgf);
+        return new board.InitAction(root);
+      }else{
+        return new board.ResetAction();
+      }
+
     })
 
   constructor(

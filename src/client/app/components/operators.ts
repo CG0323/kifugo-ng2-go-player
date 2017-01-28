@@ -6,6 +6,8 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/let';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/withLatestFrom';
 
 // ngrx
 import '@ngrx/core/add/operator/select';

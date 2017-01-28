@@ -27,6 +27,6 @@ export function getProblemRaws(state$: Observable<IDirectoryState>) {
   return state$.select(state => state.problemRaws);
 }
 
-export function getCurrentProblem(state$: Observable<IDirectoryState>) {
+export function getCurrentProblemRaw(state$: Observable<IDirectoryState>) {
   return state$.select(state => state.currentProblem);
 }

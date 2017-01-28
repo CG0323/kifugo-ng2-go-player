@@ -14,11 +14,13 @@ import { KNode,Move } from '../models/index'
 export interface IBoardActions {
   INIT: string;
   MOVE: string;
+  RESET:string;
 }
 
 export const ActionTypes: IBoardActions = {
   INIT: type(`${BOARD} Init`),
-  MOVE: type(`${BOARD} Move`)
+  MOVE: type(`${BOARD} Move`),
+  RESET: type(`${BOARD} Reset`)
 };
 
 /**
@@ -38,6 +40,11 @@ export class MoveAction implements Action {
   constructor(public payload: Move) { }
 }
 
+export class ResetAction implements Action {
+  type = ActionTypes.RESET;
+  payload:string=null;
+}
+
 
 /**
  * Export a type alias of all actions in this action group
@@ -46,3 +53,4 @@ export class MoveAction implements Action {
 export type Actions
   = InitAction
   |MoveAction
+  |ResetAction

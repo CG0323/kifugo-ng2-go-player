@@ -20,6 +20,8 @@ export interface IDirectoryActions {
   PROBLEMS_LOADED: string;
   PROBLEMS_LOADING_FAILED: string;
   SELECT_PROBLEM: string;
+  NEXT_PROBLEM: string;
+  EMPTY: string;
 }
 
 export const ActionTypes: IDirectoryActions = {
@@ -30,6 +32,8 @@ export const ActionTypes: IDirectoryActions = {
   PROBLEMS_LOADED: type(`${DIRECTORY} Problems Loaded`),
   PROBLEMS_LOADING_FAILED: type(`${DIRECTORY} Problems Loading Failed`),
   SELECT_PROBLEM: type(`${DIRECTORY} Select Problem`),
+  NEXT_PROBLEM: type(`${DIRECTORY} Next Problem`),
+  EMPTY: type(`${DIRECTORY} Empty`),
 };
 
 /**
@@ -75,6 +79,15 @@ export class SelectProblemAction implements Action {
   constructor(public payload: ProblemRaw) { }
 }
 
+export class NextProblemAction implements Action {
+  type = ActionTypes.NEXT_PROBLEM;
+  payload: string = null;
+}
+
+export class EmptyAction implements Action {
+  type = ActionTypes.EMPTY;
+  payload: string = null;
+}
 
 /**
  * Export a type alias of all actions in this action group
@@ -88,3 +101,5 @@ export type Actions
   | ProblemsLoadedAction
   | ProblemsLoadingFailedAction
   | SelectProblemAction
+  | NextProblemAction
+  | EmptyAction

@@ -97,6 +97,7 @@ export function getBoardState(state$: Observable<IAppState>): Observable<IBoardS
 export const getNames: any = compose(fromSample.getNames, getNameListState);
 export const getMenuItems: any = compose(fromGo.getMenuItems, getDirectoryState);
 export const getProblemRaws: any = compose(fromGo.getProblemRaws, getDirectoryState);
+export const getCurrentProblemRaw: any = compose(fromGo.getCurrentProblemRaw, getDirectoryState);
 export const getTextMarkups: any = compose(fromGo.getTextMarkups, getBoardState);
 export const getTrMarkups: any = compose(fromGo.getTrMarkups, getBoardState);
 export const getMsgs: any = compose(fromGo.getMsgs, getBoardState);

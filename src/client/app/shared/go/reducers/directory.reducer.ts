@@ -22,6 +22,17 @@ export function directoryReducer(
       return (<any>Object).assign({}, state, {
         currentProblem: action.payload
       });
+    case actions.ActionTypes.NEXT_PROBLEM:{
+      var nextProblem = null;
+      var nextIndex = state.currentProblem.index + 1;
+      if(nextIndex < state.problemRaws.length){
+        nextProblem = state.problemRaws[nextIndex];
+      }
+      return (<any>Object).assign({}, state, {
+        currentProblem: nextProblem
+      });
+    }
+
     default:
       return state;
   }
