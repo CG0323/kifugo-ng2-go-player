@@ -41,8 +41,8 @@ import * as fromMultilingual from '../../i18n/index';
 import { IMultilingualState } from '../../i18n/index';
 import * as fromSample from '../../sample/index';
 import { ISampleState } from '../../sample/index';
-import * as fromGo from '../../go/index';
-import { IDirectoryState, IBoardState } from '../../go/index';
+import * as fromKifuGo from '../../kifugo/index';
+import { IKifuState, IBoardState } from '../../kifugo/index';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -51,8 +51,8 @@ import { IDirectoryState, IBoardState } from '../../go/index';
 export interface IAppState {
   // i18n: fromMultilingual.IMultilingualState;
   sample: fromSample.ISampleState;
-  directory: fromGo.IDirectoryState;
-  board: fromGo.IBoardState;
+  kifu: fromKifuGo.IKifuState;
+  board: fromKifuGo.IBoardState;
 };
 
 /**
@@ -65,8 +65,8 @@ export interface IAppState {
 const reducers = {
   // i18n: fromMultilingual.reducer,
   sample: fromSample.reducer,
-  directory: fromGo.directoryReducer,
-  board: fromGo.boardReducer
+  kifu: fromKifuGo.kifuReducer,
+  board: fromKifuGo.boardReducer
 };
 
 const developmentReducer: ActionReducer<IAppState> = compose(storeFreeze, combineReducers)(reducers);
@@ -86,8 +86,8 @@ export function AppReducer(state: any, action: any) {
 export function getNameListState(state$: Observable<IAppState>): Observable<ISampleState> {
   return state$.select(s => s.sample);
 }
-export function getDirectoryState(state$: Observable<IAppState>): Observable<IDirectoryState> {
-  return state$.select(s => s.directory);
+export function getKifuState(state$: Observable<IAppState>): Observable<IKifuState> {
+  return state$.select(s => s.kifu);
 }
 export function getBoardState(state$: Observable<IAppState>): Observable<IBoardState> {
   return state$.select(s => s.board);
@@ -95,14 +95,11 @@ export function getBoardState(state$: Observable<IAppState>): Observable<IBoardS
 
 // export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
 export const getNames: any = compose(fromSample.getNames, getNameListState);
-export const getMenuItems: any = compose(fromGo.getMenuItems, getDirectoryState);
-export const getProblemRaws: any = compose(fromGo.getProblemRaws, getDirectoryState);
-export const getCurrentProblemRaw: any = compose(fromGo.getCurrentProblemRaw, getDirectoryState);
-export const getTextMarkups: any = compose(fromGo.getTextMarkups, getBoardState);
-export const getTrMarkups: any = compose(fromGo.getTrMarkups, getBoardState);
-export const getMsgs: any = compose(fromGo.getMsgs, getBoardState);
-export const getStatus: any = compose(fromGo.getStatus, getBoardState);
-export const getStones: any = compose(fromGo.getStones, getBoardState);
-export const getIsFirstProblem: any = compose(fromGo.getIsFirstProblem, getDirectoryState);
-export const getIsLastProblem: any = compose(fromGo.getIsLastProblem, getDirectoryState);
-export const getIsNotInProblem: any = compose(fromGo.getIsNotInProblem, getDirectoryState);
+export const getTextMarkups: any = compose(fromKifuGo.getTextMarkups, getBoardState);
+export const getTrMarkups: any = compose(fromKifuGo.getTrMarkups, getBoardState);
+export const getMsgs: any = compose(fromKifuGo.getMsgs, getBoardState);
+export const getStatus: any = compose(fromKifuGo.getStatus, getBoardState);
+export const getStones: any = compose(fromKifuGo.getStones, getBoardState);
+export const getKifus: any = compose(fromKifuGo.getkifus, getKifuState);
+export const getTotalKifuCount: any = compose(fromKifuGo.getTotalCount, getKifuState);
+

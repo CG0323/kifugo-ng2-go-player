@@ -5,7 +5,7 @@
       "name": "Launch localhost with sourcemaps",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:5555/",
+      "url": "http://localhost:5557/",
       "sourceMaps": true,
       "webRoot": "${workspaceRoot}/dist/dev",
       "runtimeArgs": [
@@ -33,7 +33,7 @@
       "type": "chrome",
       "preLaunchTask": "start",
       "request": "launch",
-      "url": "http://localhost:5555",
+      "url": "http://localhost:5557",
       "sourceMaps": true,
       "webRoot": "${workspaceRoot}/src/client",
       "sourceMapPathOverrides": {

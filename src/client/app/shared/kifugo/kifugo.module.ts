@@ -6,10 +6,10 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 // app
-import { GO_COMPONENTS } from './components/index';
-import { SlideMenuModule, ButtonModule,DataGridModule,MessagesModule,TieredMenuModule} from 'primeng/primeng';
-import { GO_PROVIDERS } from './services/index';
-import { DirectoryEffects,BoardEffects } from './index';
+import { KIFUGO_COMPONENTS } from './components/index';
+import { ButtonModule,MessagesModule,DataTableModule,SharedModule} from 'primeng/primeng';
+import { KIFUGO_PROVIDERS } from './services/index';
+import { KifuEffects,BoardEffects } from './index';
 import { EffectsModule } from '@ngrx/effects';
 
 /**
@@ -23,31 +23,30 @@ import { EffectsModule } from '@ngrx/effects';
     HttpModule,
     RouterModule,
     MessagesModule,
-    SlideMenuModule,
-    TieredMenuModule,
     ButtonModule,
-    DataGridModule,
-    EffectsModule.run(DirectoryEffects),
+    DataTableModule,
+    SharedModule,
+    EffectsModule.run(KifuEffects),
     EffectsModule.run(BoardEffects)
   ],
   declarations: [
-    GO_COMPONENTS
+    KIFUGO_COMPONENTS
   ],
   providers: [
-    GO_PROVIDERS
+    KIFUGO_PROVIDERS
   ],
   schemas: [
     NO_ERRORS_SCHEMA,
     CUSTOM_ELEMENTS_SCHEMA
   ],
   exports: [
-    GO_COMPONENTS,
+    KIFUGO_COMPONENTS,
   ]
 })
-export class GoModule {
-  constructor(@Optional() @SkipSelf() parentModule: GoModule) {
+export class KifuGoModule {
+  constructor(@Optional() @SkipSelf() parentModule: KifuGoModule) {
     if (parentModule) {
-      throw new Error('GoModule already loaded; Import in root module only.');
+      throw new Error('KifuGoModule already loaded; Import in root module only.');
     }
   }
 }

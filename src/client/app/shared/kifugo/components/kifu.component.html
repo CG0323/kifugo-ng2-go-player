@@ -1,0 +1,25 @@
+<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+    <input #gb type="text" pInputText size="50" placeholder="搜索" [(ngModel)]="globalFilter">
+</div>
+<p-dataTable [value]="kifus$|async" [rows]="25" [paginator]="true" [lazy]="true" [totalRecords]="totalCount$|async" (onLazyLoad)="loadKifusLazy($event)" [globalFilter]="gb">
+    <p-column [style]="{'width':'180px'}" field="dt" header="日期">
+        <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
+            <span>{{getDate(kifu.dt)}}</span>
+        </template>
+    </p-column>
+    <p-column field="pb" header="黑"></p-column>
+    <p-column field="pw" header="白"></p-column>
+    <!--<p-column field="name" header="棋局名称"></p-column>-->
+    <!--<p-column styleClass="col-button">
+        <template let-kifu="rowData" pTemplate="body">
+            <button type="button" pButton (click)="deleteKifu(kifu)" label="删除"></button>
+        </template>
+    </p-column>-->
+    <p-column [style]="{'width':'100px'}" styleClass="col-button" header="打谱">
+        <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
+            <a href="javascript:void(0)" (click)="selectKifu(kifu)">打谱</a>
+            <!--<button type="button" pButton (click)="selectKifu(kifu)" label="打谱"></button>-->
+        </template>
+    </p-column>
+</p-dataTable>

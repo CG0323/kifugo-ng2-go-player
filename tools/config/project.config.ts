@@ -18,7 +18,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
   THEME_FONTS_SRC = ['node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**'];
   constructor() {
     super();
-    this.APP_TITLE = 'go-trainer-frontend';
+    this.APP_TITLE = 'kifugo';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;

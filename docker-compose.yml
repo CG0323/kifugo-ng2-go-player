@@ -12,7 +12,7 @@ services:
     networks:
       - dev-network
     ports:
-      - '5555:5555'
+      - '5557:5557'
 
 networks:
   dev-network:

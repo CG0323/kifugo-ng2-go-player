@@ -21,7 +21,7 @@ import { AppReducer } from './app/shared/ngrx/index';
 import { AnalyticsModule } from './app/shared/analytics/analytics.module';
 import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
 import { MultilingualEffects } from './app/shared/i18n/index';
-import { GoModule } from './app/shared/go/go.module';
+import { KifuGoModule } from './app/shared/kifugo/kifugo.module';
 // import { DirectoryEffects } from './app/shared/go/index';
 
 // config
@@ -71,7 +71,7 @@ export function cons() {
       deps: [Http],
       useFactory: (translateLoaderFactory)
     }]),
-    GoModule,
+    KifuGoModule,
     StoreModule.provideStore(AppReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     // EffectsModule.run(MultilingualEffects),

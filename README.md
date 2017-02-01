@@ -215,7 +215,7 @@ You can learn more about [Protractor Interactive Mode here](https://github.com/a
 Default application server configuration
 
 ```javascript
-var PORT             = 5555;
+var PORT             = 5557;
 var LIVE_RELOAD_PORT = 4002;
 var DOCS_PORT        = 4003;
 var APP_BASE         = '/';
@@ -365,7 +365,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Now open your browser at http://localhost:5555
+Now open your browser at http://localhost:5557
 
 ## Production build and deployment
 
@@ -377,7 +377,7 @@ $ docker-compose -f docker-compose.production.yml up angular-seed   # Wait until
 $ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # Start the nginx container in detached mode
 ```
 
-Now open your browser at http://localhost:5555
+Now open your browser at http://localhost:5557
 
 ## Contributing
 
