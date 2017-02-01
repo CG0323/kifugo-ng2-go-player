@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+dl {
+    padding-left: 10em !important;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+dt,
+dd {
+    margin-bottom: 0.5em;
+    float: left;
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+dt {
+    font-weight: bold;
+    width: 9em;
+    margin-left: -10em;
+    clear: left;
+    &:after {
+        content: ":";
+    }
+}
+
+dd {
+    margin-left: 0; // reset default
+    clear: right;
+}

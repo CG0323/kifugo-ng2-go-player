@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
 import { Kifu } from '../models/index'
 import * as kifuAction from '../actions/kifu.action';
+import * as boardAction from '../actions/board.action';
 @Component({
   moduleId: module.id,
   selector: 'kifu',
@@ -24,8 +25,6 @@ export class KifuComponent implements OnInit, OnDestroy {
         this.kifus$ = store.let(getKifus);
         this.totalCount$ = store.let(getTotalKifuCount);
     }
-    private selectedKifu : Kifu;
-    
     ngOnInit():void {
        
     }
@@ -55,7 +54,7 @@ export class KifuComponent implements OnInit, OnDestroy {
     }
 
     selectKifu(k: Kifu){
-        console.log(k);
+        this.store.dispatch(new boardAction.InitAction(k));
     }
 
 }

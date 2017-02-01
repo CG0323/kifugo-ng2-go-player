@@ -27,6 +27,18 @@ export class ControlComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
     }
 
+    start(){
+
+    }
+
+    nextStep(){
+
+    }
+
+    previousStep(){
+
+    }
+
 }
 
 

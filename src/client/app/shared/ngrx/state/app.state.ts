@@ -95,10 +95,8 @@ export function getBoardState(state$: Observable<IAppState>): Observable<IBoardS
 
 // export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
 export const getNames: any = compose(fromSample.getNames, getNameListState);
-export const getTextMarkups: any = compose(fromKifuGo.getTextMarkups, getBoardState);
-export const getTrMarkups: any = compose(fromKifuGo.getTrMarkups, getBoardState);
-export const getMsgs: any = compose(fromKifuGo.getMsgs, getBoardState);
 export const getStatus: any = compose(fromKifuGo.getStatus, getBoardState);
+export const getBoardKifu: any = compose(fromKifuGo.getBoardKifu, getBoardState);
 export const getStones: any = compose(fromKifuGo.getStones, getBoardState);
 export const getKifus: any = compose(fromKifuGo.getkifus, getKifuState);
 export const getTotalKifuCount: any = compose(fromKifuGo.getTotalCount, getKifuState);

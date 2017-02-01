@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../core/utils/type';
 import { BOARD } from '../common/category.common';
-import { KNode,Move } from '../models/index'
+import { KNode,Move,Kifu } from '../models/index'
 
 /**
  * For each action type in an action group, make a simple
@@ -13,14 +13,18 @@ import { KNode,Move } from '../models/index'
  */
 export interface IBoardActions {
   INIT: string;
-  MOVE: string;
-  RESET:string;
+  START: string;
+  NEXT: string;
+  PREV: string;
+  // RESET:string;
 }
 
 export const ActionTypes: IBoardActions = {
   INIT: type(`${BOARD} Init`),
-  MOVE: type(`${BOARD} Move`),
-  RESET: type(`${BOARD} Reset`)
+  START: type(`${BOARD} Start`),
+  NEXT: type(`${BOARD} Next`),
+  PREV: type(`${BOARD} Prev`),
+  // RESET: type(`${BOARD} Reset`)
 };
 
 /**
@@ -32,16 +36,21 @@ export const ActionTypes: IBoardActions = {
  */
 export class InitAction implements Action {
   type = ActionTypes.INIT;
-  constructor(public payload: KNode) { }
+  constructor(public payload: Kifu) { }
 }
 
-export class MoveAction implements Action {
-  type = ActionTypes.MOVE;
-  constructor(public payload: Move) { }
+export class StartAction implements Action {
+  type = ActionTypes.START;
+   payload:string=null;
 }
 
-export class ResetAction implements Action {
-  type = ActionTypes.RESET;
+export class NextAction implements Action {
+  type = ActionTypes.NEXT;
+  payload:string=null;
+}
+
+export class PrevAction implements Action {
+  type = ActionTypes.PREV;
   payload:string=null;
 }
 
@@ -52,5 +61,6 @@ export class ResetAction implements Action {
  */
 export type Actions
   = InitAction
-  |MoveAction
-  |ResetAction
+  |StartAction
+  |NextAction
+  |PrevAction

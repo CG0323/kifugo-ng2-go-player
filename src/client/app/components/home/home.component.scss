@@ -36,20 +36,17 @@ a.link:hover {
 .main {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 3em;
+    margin-top: 1em;
 }
 
-.board {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-grow: 1.2;
+.left {
+    flex-grow: 1;
     max-width: 900px;
     min-width: 400px;
 }
 
-.kifu {
-    max-width: 600px;
-    flex-grow: 1;
+.right {
+    max-width: 500px;
+    flex-grow: 0;
     margin-left: 2em;
 }

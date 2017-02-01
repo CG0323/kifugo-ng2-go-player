@@ -31,7 +31,7 @@ export class KifuEffects {
 
   @Effect() search$: Observable<Action> = this.actions$
     .ofType(kifu.ActionTypes.SEARCH)
-    .startWith(new kifu.SearchAction({first: 0, rows: 25, player: null}))
+    .startWith(new kifu.SearchAction({first: 0, rows: 15, player: null}))
     .switchMap(action => {
       var params = <SearchParam>action.payload;
       return this.kifuService.searchKifus(params.first, params.rows, params.player)}

@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
 import { parseFromSgf } from 'node-sgf-parser/node-sgf-parser';
-import { KNode } from '../models/index'
+import { KNode, Kifu } from '../models/index'
 
 @Injectable()
 export class CoreService{
-    parseSgf(sgf:string):KNode{
-        return <KNode>(parseFromSgf(sgf).root);
+    static parseKifuDetail(kifu:Kifu):Kifu{
+        var temp = parseFromSgf(kifu.sgf);
+        var retVal:Kifu =  Object.assign({},kifu);
+        retVal.br = temp.info.BR;
+        retVal.ha = temp.info.HA;
+        retVal.km = temp.info.KM;
+        retVal.pc = temp.info.PC;
+        retVal.re = temp.info.RE;
+        retVal.wr = temp.info.WR;
+        retVal.root = temp.root;
+        return retVal;
     }
 
     static createGrid = ()=>{
@@ -32,7 +41,7 @@ export class CoreService{
    static getCoordinates = ()=>{
        var coordinates:string[] = [];
        for(var i = 1; i <=19; i++){
-           coordinates.push(String.fromCharCode(64 + i) + i);
+           coordinates.push(String.fromCharCode(64 + i));
        }
        
        return coordinates;

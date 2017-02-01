@@ -1,3 +1,4 @@
+import {KNode} from './index'
 export interface Kifu {
     _id: string;
     catogary: string;
@@ -13,4 +14,5 @@ export interface Kifu {
     re?: string;
     sgf?: string;
     node_count?: number;
+    root?: KNode; 
 }
