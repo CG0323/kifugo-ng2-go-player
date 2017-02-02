@@ -2,7 +2,7 @@
     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
     <input #gb type="text" pInputText size="50" placeholder="搜索" [(ngModel)]="globalFilter">
 </div>
-<p-dataTable [value]="kifus$|async" [rows]="15" [paginator]="true" [lazy]="true" [totalRecords]="totalCount$|async" (onLazyLoad)="loadKifusLazy($event)" [globalFilter]="gb">
+<p-dataTable [value]="kifus$|async" [rows]="10" [paginator]="true" [lazy]="true" [totalRecords]="totalCount$|async" (onLazyLoad)="loadKifusLazy($event)" [globalFilter]="gb">
     <p-column [style]="{'width':'120px'}" field="dt" header="日期">
         <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
             <span>{{getDate(kifu.dt)}}</span>

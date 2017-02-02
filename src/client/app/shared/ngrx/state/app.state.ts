@@ -100,4 +100,9 @@ export const getBoardKifu: any = compose(fromKifuGo.getBoardKifu, getBoardState)
 export const getStones: any = compose(fromKifuGo.getStones, getBoardState);
 export const getKifus: any = compose(fromKifuGo.getkifus, getKifuState);
 export const getTotalKifuCount: any = compose(fromKifuGo.getTotalCount, getKifuState);
+export const getIsNotInKifu: any = compose(fromKifuGo.getIsNotInKifu, getBoardState);
+export const getIsFirst: any = compose(fromKifuGo.getIsFirst, getBoardState);
+export const getIsLast: any = compose(fromKifuGo.getIsLast, getBoardState);
+export const getComment: any = compose(fromKifuGo.getComment, getBoardState);
+export const getSequence: any = compose(fromKifuGo.getSequence, getBoardState);
 

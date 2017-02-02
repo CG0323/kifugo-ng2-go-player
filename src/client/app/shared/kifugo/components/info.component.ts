@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import { LazyLoadEvent} from 'primeng/primeng';
-import { IAppState, getBoardKifu} from '../../ngrx/index';
+import { IAppState, getBoardKifu, getComment} from '../../ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
 import { Kifu } from '../models/index'
@@ -27,7 +27,9 @@ export class InfoComponent implements OnInit, OnDestroy {
     private br: string;
     private wr: string;
     private subscription;
+    private comment$: Observable<string>;
     constructor(private store: Store<IAppState>) {
+        this.comment$ = store.let(getComment);
         this.subscription = store.let(getBoardKifu).subscribe(k=>{
             if(!k)
                 return;

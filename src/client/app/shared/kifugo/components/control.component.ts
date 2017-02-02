@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { MenuItem, SlideMenuModule } from 'primeng/primeng';
-import { IAppState} from '../../ngrx/index';
+import { IAppState,getIsNotInKifu,getIsFirst, getIsLast} from '../../ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
+import * as boardAction from '../actions/board.action'
 
 
 
@@ -16,8 +17,15 @@ import { Observable} from 'rxjs/Observable';
 })
 
 export class ControlComponent implements OnInit, OnDestroy {
-      constructor(private store: Store<IAppState>) {
-        
+
+    private isNotInKifu$ : Observable<boolean>;
+    private isFirst$ : Observable<boolean>;
+    private isLast$ : Observable<boolean>;
+
+    constructor(private store: Store<IAppState>) {
+        this.isNotInKifu$ = store.let(getIsNotInKifu);
+        this.isFirst$ = store.let(getIsFirst);
+        this.isLast$ = store.let(getIsLast);
     }
     
     ngOnInit():void {
@@ -28,15 +36,15 @@ export class ControlComponent implements OnInit, OnDestroy {
     }
 
     start(){
-
+      this.store.dispatch(new boardAction.StartAction());
     }
 
     nextStep(){
-
+      this.store.dispatch(new boardAction.NextAction());
     }
 
     previousStep(){
-
+      this.store.dispatch(new boardAction.PrevAction());
     }
 
 }

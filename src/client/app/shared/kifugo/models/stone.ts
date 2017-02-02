@@ -1,5 +1,5 @@
 export interface Stone{
-    position:string;
+    // position:string;
     c: number;
     sequence: number;
 }

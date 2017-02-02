@@ -10,21 +10,72 @@ export function boardReducer(
 ): IBoardState {
   switch (action.type) {
     case actions.ActionTypes.INIT:{
-      var kifu = <Kifu>action.payload;
+      let kifu = <Kifu>action.payload;
       kifu = CoreService.parseKifuDetail(kifu);
-      var stones:Stone[] = [];
-      var node = kifu.root;
-      var sequence = 1;
+      let stones:{[strName:string]:Stone} = {};
+      let node = kifu.root;
+      let sequence = 0;
       while(node){
         if(node.move){
-          stones.push({position: node.move.x + ","+node.move.y, c: node.move.c, sequence: sequence++});
+          stones[node.move.x + ","+node.move.y] = {c: node.move.c, sequence: ++sequence};
+          let remove = CoreService.computeRemoveStones(stones, node.move.x, node.move.y);
+          for(let prop in remove){
+            if(remove.hasOwnProperty(prop)){
+              delete stones[prop];
+            }
+          }
         }
         node = node.children[0];
       }
-      var currentNode = kifu.root;
-      var status = BoardStatus.Final;
       return (<any>Object).assign({}, state, {
-        stones: stones, status:status, kifu: kifu, currentNode: currentNode
+        stones: stones, status:BoardStatus.Final, kifu: kifu, currentNode: kifu.root, sequence:sequence, removeHistory: {}
+      });
+    }
+    case actions.ActionTypes.START:{
+      return (<any>Object).assign({}, state, {
+        stones: {}, status:BoardStatus.Enabled, currentNode: state.kifu.root, sequence:0, removeHistory: {}
+      });
+    }
+
+    case actions.ActionTypes.NEXT:{
+      let stones = JSON.parse(JSON.stringify(state.stones));
+      let sequence = state.sequence + 1;
+      let move = state.currentNode.children[0].move;
+      stones[move.x + ","+move.y] = {c: move.c, sequence: sequence};
+      let currentNode = Object.assign({},state.currentNode.children[0],{parent: state.currentNode});
+      let remove = CoreService.computeRemoveStones(stones, move.x, move.y);
+      let removeHistory = state.removeHistory;
+      if(!CoreService.isEmpty(remove)){
+        removeHistory = JSON.parse(JSON.stringify(state.removeHistory));
+        removeHistory[sequence] = remove;
+      }
+      
+      for(let prop in remove){
+        if(remove.hasOwnProperty(prop)){
+          delete stones[prop];
+        }
+      }
+      return (<any>Object).assign({}, state, {
+        stones: stones, currentNode: currentNode, sequence:sequence, removeHistory: removeHistory
+      });
+    }
+
+    case actions.ActionTypes.PREV:{
+      let stones = JSON.parse(JSON.stringify(state.stones));
+      let sequence = state.sequence;
+      let move = state.currentNode.move;
+      delete stones[move.x + ","+move.y];
+      if(state.removeHistory.hasOwnProperty(sequence)){
+        let addback = state.removeHistory[sequence];
+        for(let prop in addback){
+          if(addback.hasOwnProperty(prop)){
+            stones[prop] = addback[prop];
+          }
+      }
+      }
+      
+      return (<any>Object).assign({}, state, {
+        stones: stones, currentNode: state.currentNode.parent, sequence:sequence - 1
       });
     }
 
