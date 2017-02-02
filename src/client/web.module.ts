@@ -9,7 +9,7 @@ import { Http } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateLoader } from 'ng2-translate';
+// import { TranslateLoader } from 'ng2-translate';
 
 // app
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
@@ -19,10 +19,9 @@ import { routes } from './app/components/app.routes';
 import { CoreModule } from './app/shared/core/core.module';
 import { AppReducer } from './app/shared/ngrx/index';
 import { AnalyticsModule } from './app/shared/analytics/analytics.module';
-import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
-import { MultilingualEffects } from './app/shared/i18n/index';
+// import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
+// import { MultilingualEffects } from './app/shared/i18n/index';
 import { KifuGoModule } from './app/shared/kifugo/kifugo.module';
-// import { DirectoryEffects } from './app/shared/go/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/shared/core/index';
@@ -66,11 +65,11 @@ export function cons() {
     ]),
     routerModule,
     AnalyticsModule,
-    MultilingualModule.forRoot([{
-      provide: TranslateLoader,
-      deps: [Http],
-      useFactory: (translateLoaderFactory)
-    }]),
+    // MultilingualModule.forRoot([{
+    //   provide: TranslateLoader,
+    //   deps: [Http],
+    //   useFactory: (translateLoaderFactory)
+    // }]),
     KifuGoModule,
     StoreModule.provideStore(AppReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
