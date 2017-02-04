@@ -1,0 +1,5 @@
+.ui-datatable {
+    height: 600px;
+    overflow-y: auto;
+    white-space: nowrap;
+}

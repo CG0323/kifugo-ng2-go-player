@@ -38,7 +38,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 // import { MultilingualService } from './app/shared/i18n/services/multilingual.service';
 
 
-let routerModule = RouterModule.forRoot(routes);
+let routerModule = RouterModule.forRoot(routes, {useHash: true});
 
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;

@@ -9,7 +9,7 @@ export function boardReducer(
     action: actions.Actions
 ): IBoardState {
   switch (action.type) {
-    case actions.ActionTypes.INIT:{
+    case actions.ActionTypes.INITIALIZED:{
       let kifu = <Kifu>action.payload;
       kifu = CoreService.parseKifuDetail(kifu);
       let stones:{[strName:string]:Stone} = {};

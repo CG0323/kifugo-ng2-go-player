@@ -25,11 +25,6 @@ export class KifuService extends Analytics {
     this.category = KIFU;
   }
 
-  getKifuAbstracts(): Observable<Kifu[]>{
-    return this.http.get(AppConfig.API_BASE + 'kifus/abstract')
-      .map(res => res.json());
-  }
-
   searchKifus(first:number, rows:number, player:string):Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -37,6 +32,13 @@ export class KifuService extends Analytics {
     return this.http.post(AppConfig.API_BASE + 'kifus/search', params, options)
       .map(res => {
         return {res:res.json(), params:params};
+      });
+  }
+
+  loadKifuWithDetail(id:string):Observable<any>{
+    return this.http.get(AppConfig.API_BASE + 'kifus/' + id)
+      .map(res => {
+        return res.json();
       });
   }
 

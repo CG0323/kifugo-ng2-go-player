@@ -1,13 +1,13 @@
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
+import { PlayerComponent } from './player/player.component';
 import { HomeComponent } from './home/home.component';
 
 export const APP_COMPONENTS: any[] = [
   AppComponent,
-  AboutComponent,
+  PlayerComponent,
   HomeComponent
 ];
 
 export * from './app.component';
-export * from './about/about.component';
+export * from './player/player.component';
 export * from './home/home.component';

@@ -35,8 +35,11 @@ a.link:hover {
 
 .main {
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 1em;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 1;
+    margin-top: 2px;
 }
 
 .left {

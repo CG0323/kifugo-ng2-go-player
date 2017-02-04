@@ -12,8 +12,8 @@ export interface IKifuState {
 export const initialKifuState: IKifuState = {
   kifus: <Kifu[]>[],
   first: 0,
-  rows: 15,
-  player: <string>null,
+  rows: 20,
+  player: <string>null, 
   totalCount: 0
 };
 

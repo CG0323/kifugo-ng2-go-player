@@ -17,14 +17,12 @@ import * as board from '../actions/board.action';
 })
 
 export class BoardComponent implements OnInit, OnDestroy {
-    
     dim: number = 19;                           
     lines = CoreService.getLines(19);                  
     stars = CoreService.getStars(19);                  
     staticGrid: number[][] = CoreService.createGrid();
     coordinates : string[] = CoreService.getCoordinates();
 
-    public grid$: Observable<number[][]>;
     public status$: Observable<BoardStatus>;
     private stoneSubscription;
     private stones: {[strName:string]:Stone};

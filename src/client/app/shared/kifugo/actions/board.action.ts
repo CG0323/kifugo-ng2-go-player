@@ -13,6 +13,7 @@ import { KNode,Move,Kifu } from '../models/index'
  */
 export interface IBoardActions {
   INIT: string;
+  INITIALIZED: string;
   START: string;
   NEXT: string;
   PREV: string;
@@ -21,6 +22,7 @@ export interface IBoardActions {
 
 export const ActionTypes: IBoardActions = {
   INIT: type(`${BOARD} Init`),
+  INITIALIZED: type(`${BOARD} Initialized`),
   START: type(`${BOARD} Start`),
   NEXT: type(`${BOARD} Next`),
   PREV: type(`${BOARD} Prev`),
@@ -36,6 +38,11 @@ export const ActionTypes: IBoardActions = {
  */
 export class InitAction implements Action {
   type = ActionTypes.INIT;
+  constructor(public payload: string) { }
+}
+
+export class InitializedAction implements Action {
+  type = ActionTypes.INITIALIZED;
   constructor(public payload: Kifu) { }
 }
 
@@ -61,6 +68,7 @@ export class PrevAction implements Action {
  */
 export type Actions
   = InitAction
+  |InitializedAction
   |StartAction
   |NextAction
   |PrevAction

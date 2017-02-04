@@ -1,8 +1,13 @@
 // app
 import { HomeRoutes } from './home/home.routes';
-import { AboutRoutes } from './about/about.routes';
+import { PlayerRoutes } from './player/player.routes';
 
 export const routes: Array<any> = [
+  {
+    path: '',
+    redirectTo: '/kifus',
+    pathMatch: 'full'
+  },
   ...HomeRoutes,
-  ...AboutRoutes
+  ...PlayerRoutes
 ];
