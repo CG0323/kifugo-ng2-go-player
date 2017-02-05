@@ -1,14 +1,17 @@
 <div class="player">
     <div class="group1">
         <div class="board">
-            <go-board></go-board>
+            <go-board [stones]="stones$|async" [currentSequence]="currentSequence$|async">
+
+            </go-board>
         </div>
         <div class="control">
-            <go-control></go-control>
+            <go-control [disabled]="disabled$|async" [isFirst]="isFirst$|async" [isLast]="isLast$|async" (start)="onStart()" (prev)="onPrev()" (next)="onNext()">
+            </go-control>
         </div>
     </div>
     <div class="info">
-        <info></info>
+        <info [kifu]="kifu$|async" [comment]="comment$|async"></info>
     </div>
 
 </div>

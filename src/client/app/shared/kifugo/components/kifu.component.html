@@ -2,7 +2,7 @@
     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
     <input type="text" pInputText size="30" placeholder="搜索" (ngModelChange)="filterChange($event)" [(ngModel)]="globalFilter">
 </div>
-<p-dataTable #dt [value]="kifus$|async" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount$|async" (onLazyLoad)="loadKifusLazy($event)">
+<p-dataTable #dt [value]="kifus" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount" (onLazyLoad)="onLoadKifusLazy($event)">
     <p-column field="dt" header="日期" [style]="{'width':'95px'}">
         <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
             <span>{{getDate(kifu.dt)}}</span>
@@ -20,7 +20,7 @@
     <!--<p-column [style]="{'width':'100px'}" styleClass="col-button" header="打谱">-->
     <p-column styleClass="col-button" header="打谱" [style]="{'width':'60px'}">
         <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
-            <a href="javascript:void(0)" (click)="selectKifu(kifu)">打谱</a>
+            <a href="javascript:void(0)" (click)="onSelectKifu(kifu)">打谱</a>
             <!--<button type="button" pButton (click)="selectKifu(kifu)" label="打谱"></button>-->
         </template>
     </p-column>

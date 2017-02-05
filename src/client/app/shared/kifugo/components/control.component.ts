@@ -1,9 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import { MenuItem, SlideMenuModule } from 'primeng/primeng';
-import { IAppState,getIsNotInKifu,getIsFirst, getIsLast} from '../../ngrx/index';
-import { Store } from '@ngrx/store';
-import { Observable} from 'rxjs/Observable';
-import * as boardAction from '../actions/board.action'
+import { Component, Input,Output,EventEmitter} from '@angular/core';
 
 
 
@@ -16,35 +11,28 @@ import * as boardAction from '../actions/board.action'
   ],
 })
 
-export class ControlComponent implements OnInit, OnDestroy {
+export class ControlComponent {
 
-    private isNotInKifu$ : Observable<boolean>;
-    private isFirst$ : Observable<boolean>;
-    private isLast$ : Observable<boolean>;
+    @Input() disabled: boolean;
+    @Input() isFirst: boolean;
+    @Input() isLast: boolean;
+    @Output() start = new EventEmitter<any>();
+    @Output() prev = new EventEmitter<any>();
+    @Output() next = new EventEmitter<any>();
 
-    constructor(private store: Store<IAppState>) {
-        this.isNotInKifu$ = store.let(getIsNotInKifu);
-        this.isFirst$ = store.let(getIsFirst);
-        this.isLast$ = store.let(getIsLast);
-    }
-    
-    ngOnInit():void {
-       
-    }
-    
-    ngOnDestroy() {
+    constructor() {
     }
 
-    start(){
-      this.store.dispatch(new boardAction.StartAction());
+    onStart(){
+      this.start.emit();
     }
 
-    nextStep(){
-      this.store.dispatch(new boardAction.NextAction());
+    onNext(){
+      this.next.emit();
     }
 
-    previousStep(){
-      this.store.dispatch(new boardAction.PrevAction());
+    onPrevious(){
+      this.prev.emit();
     }
 
 }

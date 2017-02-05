@@ -1,13 +1,5 @@
-<!--<div class="main">
-    <div class="left">
-        <go-board></go-board>
-        <go-control></go-control>
-    </div>
-    <div class="right">
-        <kifu></kifu>
-        <info></info>
-    </div>
-</div>-->
 <div class="main">
-    <kifu></kifu>
+    <kifu [kifus]="kifus$|async" [totalCount]="totalCount$|async" (loadKifus)="onLoadKifus($event)" (selectKifu)="onSelectKifu($event)">
+
+    </kifu>
 </div>

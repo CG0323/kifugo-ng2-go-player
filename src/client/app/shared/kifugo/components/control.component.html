@@ -1,12 +1,12 @@
 <div class="container">
     <div class="item">
-        <button type="button" [disabled]="isNotInKifu$|async" pButton icon="fa fa-refresh" label="开始" (click)="start()"></button>
+        <button type="button" [disabled]="disabled" pButton icon="fa fa-refresh" label="开始" (click)="onStart()"></button>
     </div>
     <div class="item">
-        <button type="button" [disabled]="isFirst$|async" pButton icon="fa fa-backward" label="上一步" (click)="previousStep()"></button>
+        <button type="button" [disabled]="isFirst" pButton icon="fa fa-backward" label="上一步" (click)="onPrevious()"></button>
     </div>
 
     <div class="item">
-        <button type="button" [disabled]="isLast$|async" pButton icon="fa fa-forward" label="下一步" (click)="nextStep()"></button>
+        <button type="button" [disabled]="isLast" pButton icon="fa fa-forward" label="下一步" (click)="onNext()"></button>
     </div>
 </div>

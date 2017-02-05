@@ -1,22 +1,8 @@
 <div class="info-panel">
-    <dl>
-        <dt>对局日期</dt>
-        <dd>{{dt}}</dd>
-
-        <dt>棋局名称</dt>
-        <dd>{{name}}</dd>
-
-        <dt>黑方</dt>
-        <dd>{{pb}} {{br}}</dd>
-
-        <dt>白方</dt>
-        <dd>{{pw}} {{wr}}</dd>
-
-        <dt>贴目</dt>
-        <dd>{{km}}</dd>
-
-        <dt>结果</dt>
-        <dd>{{re}}</dd>
-    </dl>
-    <p>{{comment$|async}}</p>
+    <p>{{getDate(kifu.dt)}}</p>
+    <p>{{kifu.name}}</p>
+    <p>{{kifu.pb}} {{kifu.br}} vs {{kifu.pw}} {{kifu.wr}}</p>
+    <p>贴目: {{kifu.km}}</p>
+    <p>结果: {{kifu.re}}</p>
+    <!--<p>{{comment}}</p>-->
 </div>

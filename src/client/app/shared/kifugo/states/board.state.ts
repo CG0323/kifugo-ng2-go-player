@@ -31,7 +31,13 @@ export function getStones(state$: Observable<IBoardState>) {
 }
 
 export function getBoardKifu(state$: Observable<IBoardState>) {
-  return state$.select(state => state.kifu);
+  return state$.select(state => {
+  if (state.kifu){
+    return state.kifu;
+  }else{
+    return {};
+  }
+  });
 }
 
 export function getSequence(state$: Observable<IBoardState>) {

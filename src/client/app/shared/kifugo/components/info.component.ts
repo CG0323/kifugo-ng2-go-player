@@ -1,8 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
-import { LazyLoadEvent} from 'primeng/primeng';
-import { IAppState, getBoardKifu, getComment} from '../../ngrx/index';
-import { Store } from '@ngrx/store';
-import { Observable} from 'rxjs/Observable';
+import { Component, Input} from '@angular/core';
 import { Kifu } from '../models/index'
 
 @Component({
@@ -11,51 +7,19 @@ import { Kifu } from '../models/index'
   templateUrl: 'info.component.html',
   styleUrls: [
     'info.component.css',
-  ],
-  changeDetection: ChangeDetectionStrategy.Default
+  ]
 })
 
-export class InfoComponent implements OnInit, OnDestroy {
-    private kifu: Kifu;
-    private dt: string;
-    private pb: string;
-    private pw: string;
-    private pc: string;
-    private re: string;
-    private km: string;
-    private name: string;
-    private br: string;
-    private wr: string;
-    private subscription;
-    private comment$: Observable<string>;
-    constructor(private store: Store<IAppState>) {
-        this.comment$ = store.let(getComment);
-        this.subscription = store.let(getBoardKifu).subscribe(k=>{
-            if(!k)
-                return;
-            var kifu:Kifu = <Kifu>k;
-            
-            this.dt = this.getDate(kifu.dt);
-            this.pb = kifu.pb;
-            this.pw = kifu.pw;
-            this.pc = kifu.pc;
-            this.re = kifu.re;
-            this.km = kifu.km;
-            this.name = kifu.name;
-            this.br = kifu.br;
-            this.wr = kifu.wr;
-        })
-    }
-
-    ngOnInit():void {
-       
-    }
-    
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+export class InfoComponent {
+    @Input() kifu: Kifu;
+    @Input() comment: string;
+    constructor() {
     }
 
     getDate(dt:any){
+        if(!dt){
+            return "";
+        }
         var matchDate = new Date(dt);
         return matchDate.toLocaleDateString();
     }

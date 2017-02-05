@@ -25,6 +25,15 @@ export function getTotalCount(state$: Observable<IKifuState>) {
   return state$.select(state => state.totalCount);
 }
 
+export function getFirst(state$: Observable<IKifuState>) {
+  return state$.select(state => state.first);
+}
+
+export function getPlayer(state$: Observable<IKifuState>) {
+  return state$.select(state => state.player);
+}
+
+
 
 
 
