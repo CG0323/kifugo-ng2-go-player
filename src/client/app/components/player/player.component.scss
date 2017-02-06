@@ -8,6 +8,9 @@
         width: 100vw;
         flex: 1;
     }
+    .back {
+        align-self: flex-start;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -27,5 +30,10 @@
     .info {
         margin-top: 5em;
         margin-left: 3em;
+        font-size: 16px;
+        font: "NOTO";
+    }
+    .back {
+        align-self: flex-start;
     }
 }

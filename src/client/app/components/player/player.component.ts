@@ -1,4 +1,5 @@
 import { Injector, Component } from '@angular/core';
+import { Location} from '@angular/common';
 import { Config } from '../../shared/core/index';
 import {Router, ActivatedRoute} from '@angular/router';
 import { IAppState, getStones, getSequence, getBoardKifu, getComment, getIsNotInKifu,getIsFirst, getIsLast} from '../../shared/ngrx/index';
@@ -22,7 +23,7 @@ export class PlayerComponent {
     private kifu$: Observable<Kifu>;
     private stones$: Observable<{[strName:string]:Stone}>;
     private currentSequence$: Observable<number>;
-  constructor(private store: Store<IAppState>, private router: Router, private route: ActivatedRoute) {
+  constructor(private store: Store<IAppState>, private router: Router, private route: ActivatedRoute, private location:Location) {
       let id = this.route.snapshot.params['id'];
       this.store.dispatch(new boardAction.InitAction(id));
 
@@ -46,4 +47,8 @@ export class PlayerComponent {
   onPrev(){
       this.store.dispatch(new boardAction.PrevAction());
     }
+  goBack(){
+      console.log(this.location);
+      this.location.back();
+  }
 }

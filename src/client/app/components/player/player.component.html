@@ -1,8 +1,10 @@
 <div class="player">
     <div class="group1">
+        <div class="back">
+            <a href="javascript:void(0)" (click)="goBack()">返回</a>
+        </div>
         <div class="board">
             <go-board [stones]="stones$|async" [currentSequence]="currentSequence$|async">
-
             </go-board>
         </div>
         <div class="control">

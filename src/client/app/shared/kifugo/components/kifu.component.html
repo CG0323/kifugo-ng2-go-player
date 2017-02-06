@@ -1,6 +1,6 @@
 <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-    <input type="text" pInputText size="30" placeholder="搜索" (ngModelChange)="filterChange($event)" [(ngModel)]="globalFilter">
+    <input type="text" pInputText size="30" placeholder="可输入棋手名搜索" (ngModelChange)="filterChange($event)" [(ngModel)]="globalFilter">
 </div>
 <p-dataTable #dt [value]="kifus" [rows]="20" [paginator]="true" [lazy]="true" [totalRecords]="totalCount" (onLazyLoad)="onLoadKifusLazy($event)">
     <p-column field="dt" header="日期" [style]="{'width':'95px'}">
@@ -9,19 +9,19 @@
         </template>
     </p-column>
     <p-column field="pb" header="黑"></p-column>
+    <p-column field="br" header="黑方段位" [hidden]="isInMobile()"></p-column>
     <p-column field="pw" header="白"></p-column>
-    <!--<p-column field="name" header="棋局名称"></p-column>-->
-    <!--<p-column field="re" header="结果"></p-column>-->
+    <p-column field="wr" header="白方段位" [hidden]="isInMobile()"></p-column>
+    <p-column field="name" header="棋局名称" [hidden]="isInMobile()" [style]="{'width':'300px'}"></p-column>
+    <p-column field="re" header="结果" [hidden]="isInMobile()"></p-column>
     <!--<p-column styleClass="col-button">
         <template let-kifu="rowData" pTemplate="body">
             <button type="button" pButton (click)="deleteKifu(kifu)" label="删除"></button>
         </template>
     </p-column>-->
-    <!--<p-column [style]="{'width':'100px'}" styleClass="col-button" header="打谱">-->
     <p-column styleClass="col-button" header="打谱" [style]="{'width':'60px'}">
         <template let-kifu="rowData" let-i="rowIndex" pTemplate="body">
             <a href="javascript:void(0)" (click)="onSelectKifu(kifu)">打谱</a>
-            <!--<button type="button" pButton (click)="selectKifu(kifu)" label="打谱"></button>-->
         </template>
     </p-column>
 </p-dataTable>

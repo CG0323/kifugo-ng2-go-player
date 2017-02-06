@@ -31,12 +31,92 @@
                     // }}();
                 </script>
                 <% } %>
-
+                    <style>
+                        body {
+                            background-color: #F2F2F2;
+                        }
+                        
+                        .sk-chasing-dots {
+                            margin: 100px auto;
+                            width: 100px;
+                            height: 100px;
+                            position: relative;
+                            text-align: center;
+                            -webkit-animation: sk-chasingDotsRotate 2s infinite linear;
+                            animation: sk-chasingDotsRotate 2s infinite linear;
+                        }
+                        
+                        .sk-chasing-dots .sk-child {
+                            width: 60%;
+                            height: 60%;
+                            display: inline-block;
+                            position: absolute;
+                            top: 0;
+                            border-radius: 100%;
+                            -webkit-animation: sk-chasingDotsBounce 2s infinite ease-in-out;
+                            animation: sk-chasingDotsBounce 2s infinite ease-in-out;
+                        }
+                        
+                        .sk-chasing-dots .sk-dot1 {
+                            background-color: #fff;
+                        }
+                        
+                        .sk-chasing-dots .sk-dot2 {
+                            background-color: #000;
+                            top: auto;
+                            bottom: 0;
+                            -webkit-animation-delay: -1s;
+                            animation-delay: -1s;
+                        }
+                        
+                        @-webkit-keyframes sk-chasingDotsRotate {
+                            100% {
+                                -webkit-transform: rotate(360deg);
+                                transform: rotate(360deg);
+                            }
+                        }
+                        
+                        @keyframes sk-chasingDotsRotate {
+                            100% {
+                                -webkit-transform: rotate(360deg);
+                                transform: rotate(360deg);
+                            }
+                        }
+                        
+                        @-webkit-keyframes sk-chasingDotsBounce {
+                            0%,
+                            100% {
+                                -webkit-transform: scale(0);
+                                transform: scale(0);
+                            }
+                            50% {
+                                -webkit-transform: scale(1);
+                                transform: scale(1);
+                            }
+                        }
+                        
+                        @keyframes sk-chasingDotsBounce {
+                            0%,
+                            100% {
+                                -webkit-transform: scale(0);
+                                transform: scale(0);
+                            }
+                            50% {
+                                -webkit-transform: scale(1);
+                                transform: scale(1);
+                            }
+                        }
+                    </style>
 </head>
 
 <body>
 
-    <sd-app>Loading...</sd-app>
+    <sd-app>
+        <div class="sk-chasing-dots">
+            <div class="sk-child sk-dot1"></div>
+            <div class="sk-child sk-dot2"></div>
+        </div>
+    </sd-app>
 
     <script>
         // Fixes undefined module function in SystemJS bundle

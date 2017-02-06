@@ -3,3 +3,9 @@
     overflow-y: auto;
     white-space: nowrap;
 }
+
+@media (max-width: 1024px) {
+    .hide-mobile {
+        display: none;
+    }
+}

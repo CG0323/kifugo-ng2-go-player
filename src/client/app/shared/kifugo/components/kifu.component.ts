@@ -74,7 +74,15 @@ export class KifuComponent implements OnInit {
         };
         this.dataTable.paginate(paging);
     }
-
+    
+    isInMobile():boolean{
+        let innerWidth = window.screen.width;
+        if(innerWidth <= 1024){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 
