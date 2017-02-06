@@ -5,7 +5,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { IAppState, getStones, getSequence, getBoardKifu, getComment, getIsNotInKifu,getIsFirst, getIsLast} from '../../shared/ngrx/index';
 import { Store } from '@ngrx/store';
 import { Observable} from 'rxjs/Observable';
-import * as boardAction from '../../shared/kifugo/actions/board.action'
+import * as playerAction from '../../shared/kifugo/actions/player.action'
 import { Kifu, Stone } from '../../shared/kifugo/models/index'
 @Component({
   moduleId: module.id,
@@ -25,7 +25,7 @@ export class PlayerComponent {
     private currentSequence$: Observable<number>;
   constructor(private store: Store<IAppState>, private router: Router, private route: ActivatedRoute, private location:Location) {
       let id = this.route.snapshot.params['id'];
-      this.store.dispatch(new boardAction.InitAction(id));
+      this.store.dispatch(new playerAction.InitAction(id));
 
       this.disabled$ = store.let(getIsNotInKifu);
       this.isFirst$ = store.let(getIsFirst);
@@ -37,15 +37,15 @@ export class PlayerComponent {
   }
 
   onStart(){
-      this.store.dispatch(new boardAction.StartAction());
+      this.store.dispatch(new playerAction.StartAction());
     }
 
   onNext(){
-      this.store.dispatch(new boardAction.NextAction());
+      this.store.dispatch(new playerAction.NextAction());
     }
 
   onPrev(){
-      this.store.dispatch(new boardAction.PrevAction());
+      this.store.dispatch(new playerAction.PrevAction());
     }
   goBack(){
       console.log(this.location);

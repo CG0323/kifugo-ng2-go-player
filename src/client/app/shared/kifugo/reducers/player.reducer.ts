@@ -1,13 +1,13 @@
-import { IBoardState, initialBoardState } from '../states/board.state';
-import * as actions from '../actions/board.action';
+import { IPlayerState, initialBoardState } from '../states/player.state';
+import * as actions from '../actions/player.action';
 import {CoreService} from '../services/index'
 import { Message} from 'primeng/primeng';
 import { Markup, BoardStatus, Move, KNode, Stone, Kifu} from '../models/index';
 
-export function boardReducer(
-    state: IBoardState = initialBoardState,
+export function playerReducer(
+    state: IPlayerState = initialBoardState,
     action: actions.Actions
-): IBoardState {
+): IPlayerState {
   switch (action.type) {
     case actions.ActionTypes.INITIALIZED:{
       let kifu = <Kifu>action.payload;

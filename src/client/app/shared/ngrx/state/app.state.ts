@@ -38,7 +38,7 @@ import { combineReducers } from '@ngrx/store';
  * notation packages up all of the exports into a single object.
  */
 import * as fromKifuGo from '../../kifugo/index';
-import { IKifuState, IBoardState } from '../../kifugo/index';
+import { IKifuState, IPlayerState } from '../../kifugo/index';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -46,7 +46,7 @@ import { IKifuState, IBoardState } from '../../kifugo/index';
  */
 export interface IAppState {
   kifu: fromKifuGo.IKifuState;
-  board: fromKifuGo.IBoardState;
+  player: fromKifuGo.IPlayerState;
 };
 
 /**
@@ -58,7 +58,7 @@ export interface IAppState {
  */
 const reducers = {
   kifu: fromKifuGo.kifuReducer,
-  board: fromKifuGo.boardReducer
+  player: fromKifuGo.playerReducer
 };
 
 const developmentReducer: ActionReducer<IAppState> = compose(storeFreeze, combineReducers)(reducers);
@@ -75,20 +75,20 @@ export function AppReducer(state: any, action: any) {
 export function getKifuState(state$: Observable<IAppState>): Observable<IKifuState> {
   return state$.select(s => s.kifu);
 }
-export function getBoardState(state$: Observable<IAppState>): Observable<IBoardState> {
-  return state$.select(s => s.board);
+export function getPlayerState(state$: Observable<IAppState>): Observable<IPlayerState> {
+  return state$.select(s => s.player);
 }
 
-export const getStatus: any = compose(fromKifuGo.getStatus, getBoardState);
-export const getBoardKifu: any = compose(fromKifuGo.getBoardKifu, getBoardState);
-export const getStones: any = compose(fromKifuGo.getStones, getBoardState);
+export const getStatus: any = compose(fromKifuGo.getStatus, getPlayerState);
+export const getBoardKifu: any = compose(fromKifuGo.getBoardKifu, getPlayerState);
+export const getStones: any = compose(fromKifuGo.getStones, getPlayerState);
 export const getKifus: any = compose(fromKifuGo.getkifus, getKifuState);
 export const getFirst: any = compose(fromKifuGo.getFirst, getKifuState);
 export const getPlayer: any = compose(fromKifuGo.getPlayer, getKifuState);
 export const getTotalKifuCount: any = compose(fromKifuGo.getTotalCount, getKifuState);
-export const getIsNotInKifu: any = compose(fromKifuGo.getIsNotInKifu, getBoardState);
-export const getIsFirst: any = compose(fromKifuGo.getIsFirst, getBoardState);
-export const getIsLast: any = compose(fromKifuGo.getIsLast, getBoardState);
-export const getComment: any = compose(fromKifuGo.getComment, getBoardState);
-export const getSequence: any = compose(fromKifuGo.getSequence, getBoardState);
+export const getIsNotInKifu: any = compose(fromKifuGo.getIsNotInKifu, getPlayerState);
+export const getIsFirst: any = compose(fromKifuGo.getIsFirst, getPlayerState);
+export const getIsLast: any = compose(fromKifuGo.getIsLast, getPlayerState);
+export const getComment: any = compose(fromKifuGo.getComment, getPlayerState);
+export const getSequence: any = compose(fromKifuGo.getSequence, getPlayerState);
 

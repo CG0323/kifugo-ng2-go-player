@@ -1,2 +1,2 @@
 export * from './kifu.state';
-export * from './board.state';
+export * from './player.state';

@@ -7,22 +7,21 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 // module
 import {KifuService, CoreService } from '../services/index';
-import * as kifu from '../actions/kifu.action';
-import * as board from '../actions/board.action';
+import * as player from '../actions/player.action';
 import {KNode, BoardStatus} from '../models/index'
 import {getStatus} from '../../ngrx/index'
 
 @Injectable()
-export class BoardEffects {
+export class PlayerEffects {
 
   @Effect() init$: Observable<Action> = this.actions$
-    .ofType(board.ActionTypes.INIT)
+    .ofType(player.ActionTypes.INIT)
     .switchMap(action => {
       var id = action.payload;
       return this.kifuService.loadKifuWithDetail(id)}
     )
     .map(data => {
-      return new board.InitializedAction(data);
+      return new player.InitializedAction(data);
     })
 
   constructor(

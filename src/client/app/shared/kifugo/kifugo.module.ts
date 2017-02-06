@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 
 // app
 import { KIFUGO_COMPONENTS } from './components/index';
-import { ButtonModule,MessagesModule,DataTableModule,SharedModule} from 'primeng/primeng';
+import { ButtonModule,DataTableModule,SharedModule} from 'primeng/primeng';
 import { KIFUGO_PROVIDERS } from './services/index';
-import { KifuEffects,BoardEffects } from './index';
+import { KifuEffects,PlayerEffects } from './index';
 import { EffectsModule } from '@ngrx/effects';
 
 /**
@@ -22,12 +22,11 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     HttpModule,
     RouterModule,
-    MessagesModule,
     ButtonModule,
     DataTableModule,
     SharedModule,
     EffectsModule.run(KifuEffects),
-    EffectsModule.run(BoardEffects)
+    EffectsModule.run(PlayerEffects)
   ],
   declarations: [
     KIFUGO_COMPONENTS

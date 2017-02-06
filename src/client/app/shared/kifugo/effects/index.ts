@@ -1,2 +1,2 @@
 export * from './kifu.effect';
-export * from './board.effect';
+export * from './player.effect';

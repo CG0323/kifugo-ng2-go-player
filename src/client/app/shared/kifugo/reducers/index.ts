@@ -1,2 +1,2 @@
 export * from './kifu.reducer';
-export * from './board.reducer';
+export * from './player.reducer';

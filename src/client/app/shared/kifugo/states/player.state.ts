@@ -4,7 +4,7 @@ import { CoreService} from '../services/index';
 import { Message} from 'primeng/primeng';
 
 
-export interface IBoardState {
+export interface IPlayerState {
   kifu: Kifu,
   status: BoardStatus,
   currentNode: KNode,
@@ -13,7 +13,7 @@ export interface IBoardState {
   removeHistory: {[sequence:number]: {[strName:string]:Stone}}
 }
 
-export const initialBoardState: IBoardState = {
+export const initialBoardState: IPlayerState = {
   kifu: <Kifu>null,
   status: BoardStatus.Final,
   currentNode: <KNode>null,
@@ -22,15 +22,15 @@ export const initialBoardState: IBoardState = {
   removeHistory: {}
 };
 
-export function getStatus(state$: Observable<IBoardState>) {
+export function getStatus(state$: Observable<IPlayerState>) {
   return state$.select(state => state.status);
 }
 
-export function getStones(state$: Observable<IBoardState>) {
+export function getStones(state$: Observable<IPlayerState>) {
   return state$.select(state => state.stones);
 }
 
-export function getBoardKifu(state$: Observable<IBoardState>) {
+export function getBoardKifu(state$: Observable<IPlayerState>) {
   return state$.select(state => {
   if (state.kifu){
     return state.kifu;
@@ -40,23 +40,23 @@ export function getBoardKifu(state$: Observable<IBoardState>) {
   });
 }
 
-export function getSequence(state$: Observable<IBoardState>) {
+export function getSequence(state$: Observable<IPlayerState>) {
   return state$.select(state => state.sequence);
 }
 
-export function getIsFirst(state$: Observable<IBoardState>) {
+export function getIsFirst(state$: Observable<IPlayerState>) {
   return state$.select(state => !(state.currentNode)|| !(state.currentNode.parent));
 }
 
-export function getIsLast(state$: Observable<IBoardState>) {
+export function getIsLast(state$: Observable<IPlayerState>) {
   return state$.select(state => !(state.currentNode)|| !(state.currentNode.children) || (state.currentNode.children.length == 0) || state.status == BoardStatus.Final);
 }
 
-export function getIsNotInKifu(state$: Observable<IBoardState>) {
+export function getIsNotInKifu(state$: Observable<IPlayerState>) {
   return state$.select(state => !(state.kifu));
 }
 
-export function getComment(state$: Observable<IBoardState>) {
+export function getComment(state$: Observable<IPlayerState>) {
   return state$.select(state =>{
     if(state.currentNode && state.currentNode.parent){
       return state.currentNode.comment;

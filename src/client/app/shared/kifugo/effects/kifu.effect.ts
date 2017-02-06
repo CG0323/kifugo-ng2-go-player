@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 // module
 import { KifuService, CoreService } from '../services/index';
 import * as kifu from '../actions/kifu.action';
-import * as board from '../actions/board.action';
+import * as player from '../actions/player.action';
 import {KNode,Kifu,SearchParam} from '../models/index'
 
 @Injectable()
