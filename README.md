@@ -1,49 +1,87 @@
+#kifugo
+
 Kifugo is an online go game kifu respository and kifu player.
 It is an **Angular2** app based on Nathan Walker's [angular-seed_advanced](https://github.com/NathanWalker/angular-seed-advanced).
 The backend of this app is at [kifugo-backend](https://github.com/CG0323/kifugo-backend), which is **Node.js** + **Mongodb** Rest API.
+-------- 
 
-# Demo
+## Demo
 ![Kifus](images/kifu.gif)  ![Player](images/player.gif)  
 
+## Techniques Practiced:
 
-#### Integration with:
-- [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
-- [ngrx/effects](https://github.com/ngrx/effects) Side effect model for @ngrx/store
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
-  - Usage is optional but on by default
-  - Up to you and your team how you want to utilize it. It can be easily removed if not needed. 
-- [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular applications.
-  - Out of box support for [Segment](https://segment.com/)
-    - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/index.html#L24)
-  - Can be changed to any vendor, [learn more here](https://github.com/angulartics/angulartics2#supported-providers)
-- [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
-- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps. [Setup instructions here](#nativescript-app).
-- [Electron](http://electron.atom.io/) cross platform desktop apps (Mac, Windows and Linux). [Setup instructions here](#electron-app).
+### Angular2 Basic
+``
 
-| ![Multiple Platforms](https://cdn.filestackcontent.com/zZlQKKKjQUaBr9pLkEVK) |
-| :---: |
-| *The zen of multiple platforms.* Chrome, Android and iPhone all running the same code. |
+### Primeng integration
+The kifu list & searching compoent is built based on [Primeng Datatable](http://www.primefaces.org/primeng/#/datatable).
+Adding primeng to the ng2 seed project is referenced to [this instruction](https://github.com/mgechev/angular-seed/wiki/Add-PrimeNG)
 
-| ![Desktop](https://d2wp4shknjcfjl.cloudfront.net/api/file/1O4FRGsSHS8g0Lz3EKNy) |
-| :---: |
-| *Programming Nirvana.* Mac and Windows desktop both running the same code. |
+### Backend pagination
+Go-Game kifus repository is a large dataset, it is not a good idea to load all the data once, Primeng Datatable's lazyload feature 
+is used together with backend pagination:
+
+in frontend:  
+```typescript
+  searchKifus(first:number, rows:number, player:string):Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    var params = {first:first, rows:rows, player:player};
+    return this.http.post(AppConfig.API_BASE + 'kifus/search', params, options)
+      .map(res => {
+        return {res:res.json(), params:params};
+      });
+  }
+```
+in backend:  
+```javascript
+router.post('/search', function(req, res, next) {
+    var param = req.body;
+    var first = param.first;
+    var rows = param.rows;
+    var player = param.player;
+    var conditions = {};
+    if (player) {
+        conditions = { $or: [{ pb: { $regex: player } }, { pw: { $regex: player } }] };
+    }
+    Kifu.find(conditions)
+        .sort({ dt: -1 })
+        .skip(first)
+        .limit(rows)
+        .select('dt name pb br pw wr re km')
+        .exec()
+        .then(function(kifus) {
+                Kifu.count(conditions, function(err, c) {
+                    if (err) {
+                        logger.error(err);
+                        res.status(500).send("falied to get totoal count");
+                    }
+                    res.status(200).json({
+                        totalCount: c,
+                        kifus: kifus
+                    })
+                });
+            },
+            function(err) {
+                res.status(500).send("failt to search kifus");
+            }
+        )
+});
+```
+
+### Rxjs operators
+
+### Ngrx/Store
+
+### Ngrx/Effects
+
+### Smart components & Dumb components
+
+### HTML5 SVG
+
+### Media query
 
 # Table of Contents
-
-  
-### Prerequisites
-
-**Note** you should have **node v6.5.0 or higher** and **npm 3.10.3 or higher**.
-
-## How to start
-
-```bash
-# install the project's dependencies
-$ npm install
-# fast install (via Yarn, https://yarnpkg.com)
-$ yarn install  # or yarn
-# watches your files and uses livereload by default
-$ npm start
 
 ## License
 MIT

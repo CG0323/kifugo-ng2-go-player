@@ -54,23 +54,6 @@
         "build.index.prod"
     ],
 
-    "build.tns": [
-        "build.assets.tns",
-        "build.tns_html_css",
-        "build.js.tns"
-    ],
-
-    "build.prod.tns": [
-        "clean.tns",
-        "tslint.tns",
-        "build.tns"
-    ],
-
-    "build.tns.watch": [
-        "build.tns",
-        "watch.tns"
-    ],
-
     "build.test": [
         "build.assets.dev",
         "build.fonts",
@@ -120,26 +103,5 @@
     "test": [
         "build.test",
         "karma.run"
-    ],
-
-    "desktop": [
-        "build.dev",
-        "desktop.libs",
-        "desktop.build"
-    ],
-
-    "desktop.mac": [
-        "desktop",
-        "desktop.package.mac"
-    ],
-
-    "desktop.windows": [
-        "desktop",
-        "desktop.package.windows"
-    ],
-
-    "desktop.linux": [
-        "desktop",
-        "desktop.package.linux"
     ]
 }

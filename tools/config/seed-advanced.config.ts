@@ -102,13 +102,6 @@ export class SeedAdvancedConfig extends SeedConfig {
         }
       },
       {
-        name: 'ng2-translate',
-        packageMeta: {
-          main: 'bundles/index.js',
-          defaultExtension: 'js'
-        }
-      },
-      {
         name: 'angulartics2',
         packageMeta: {
           main: 'dist/index.js',
@@ -138,8 +131,7 @@ export class SeedAdvancedConfig extends SeedConfig {
     this.PLUGIN_CONFIGS['gulp-sass-tns'] = {
       includePaths: [
         this.srcSubdir,
-        './node_modules/',
-        './node_modules/nativescript-theme-core/scss/'
+        './node_modules/'
       ].map((dir) => path.resolve(this.TNS_BASE_DIR, dir)),
     };
 

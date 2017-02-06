@@ -1,20 +1,15 @@
 {
     "name": "kifugo",
-    "version": "0.0.0",
-    "description": "High-quality, modular starter (advanced seed) project for Angular 2 apps with statically typed build and AoT + NativeScript + Electron",
+    "version": "1.0.0",
+    "description": "an online go game kifu respository and kifu player. It is an Angular2 app based on Nathan Walker's angular-seed_advanced. The backend of this app is at kifugo-backend, which is Node.js + Mongodb Rest API. This project practices the techniques below: ng2, HTML5 svg, Ngrx/Store, Ngrx/Effect, Rxjs, Media based css design, etc.",
     "repository": {
-        "url": "https://github.com/NathanWalker/angular-seed-advanced"
+        "url": "https://github.com/CG0323/kifugo-frontend"
     },
     "scripts": {
-        "build.desktop.mac": "rimraf desktop/mac/* && gulp desktop.mac",
-        "build.desktop.windows": "rimraf desktop/windows/* && gulp desktop.windows",
-        "build.desktop.linux": "rimraf desktop/linux/* && gulp desktop.linux",
         "build.dev": "gulp build.dev --color --env-config dev",
         "build.dev.watch": "gulp build.dev.watch --color",
         "build.docs": "npm run gulp -- build.docs --color",
         "build.e2e": "gulp build.e2e --color",
-        "build.android": "gulp build.prod.tns && cd nativescript && npm run start-android-bundle",
-        "build.ios": "gulp build.prod.tns && cd nativescript && npm run start-ios-bundle",
         "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
         "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
         "build.prod.aot": "gulp build.prod.exp --color --env-config prod --build-type prod",
@@ -30,8 +25,6 @@
         "lint": "gulp tslint",
         "karma": "karma",
         "karma.start": "karma start",
-        "nativescript-install": "cd nativescript && npm install",
-        "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && npm run nativescript-install && node tools/install.js",
         "reinstall": "npm cache clean && npm install",
         "serve.coverage": "gulp serve.coverage --color",
         "serve.dev": "gulp serve.dev --color --env-config dev",
@@ -40,16 +33,6 @@
         "serve.prod.exp": "gulp serve.prod.exp --color --env-config prod",
         "start": "gulp serve.dev --color",
         "start.deving": "gulp start.deving --color",
-        "start.desktop": "gulp desktop && NODE_ENV=development electron ./dist/dev",
-        "start.livesync.desktop": "gulp desktop && NODE_ENV=development gulp desktop.watch",
-        "start.livesync.desktop.windows": "gulp desktop && SET NODE_ENV=development && gulp desktop.watch",
-        "start.desktop.windows": "gulp desktop && SET NODE_ENV=development && electron ./dist/dev",
-        "start.ios": "npm run nativescript-install && gulp build.prod.tns && npm prune && cd nativescript && tns run ios --emulator",
-        "start.livesync.ios": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns livesync ios --emulator --watch'",
-        "start.livesync.ios.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'build.tns.watch' 'cd nativescript && tns livesync ios --watch'",
-        "start.android": "npm run nativescript-install && gulp build.prod.tns && npm prune && cd nativescript && tns run android --emulator",
-        "start.livesync.android": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns livesync android --emulator --watch'",
-        "start.livesync.android.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns livesync android --watch'",
         "tasks.list": "gulp --tasks-simple --color",
         "test": "gulp test --color",
         "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
@@ -59,9 +42,9 @@
         "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
         "serve.compodoc": "node_modules/.bin/compodoc -s"
     },
-    "author": "Minko Gechev <mgechev>",
+    "author": "CG0323",
     "contributors": [{
-        "name": "Nathan Walker <NathanWalker>"
+        "name": "CG0323"
     }],
     "license": "MIT",
     "devDependencies": {
@@ -97,9 +80,6 @@
         "connect-history-api-fallback": "^1.3.0",
         "cssnano": "^3.7.7",
         "deep-extend": "^0.4.1",
-        "electron-connect": "^0.4.2",
-        "electron-debug": "^1.0.0",
-        "electron-prebuilt": "^1.2.1",
         "event-stream": "^3.3.4",
         "express": "~4.14.0",
         "express-history-api-fallback": "^2.0.0",

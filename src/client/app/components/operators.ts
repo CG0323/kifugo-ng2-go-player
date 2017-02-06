@@ -9,6 +9,7 @@ import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/observable/of';
 
 // ngrx
 import '@ngrx/core/add/operator/select';

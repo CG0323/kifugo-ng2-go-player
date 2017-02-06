@@ -40,11 +40,6 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 
 let routerModule = RouterModule.forRoot(routes, {useHash: true});
 
-if (String('<%= TARGET_DESKTOP %>') === 'true') {
-  Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
-  // desktop (electron) must use hash
-  routerModule = RouterModule.forRoot(routes, {useHash: true});
-}
 
 declare var window, console;
 
@@ -65,16 +60,9 @@ export function cons() {
     ]),
     routerModule,
     AnalyticsModule,
-    // MultilingualModule.forRoot([{
-    //   provide: TranslateLoader,
-    //   deps: [Http],
-    //   useFactory: (translateLoaderFactory)
-    // }]),
     KifuGoModule,
     StoreModule.provideStore(AppReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    // EffectsModule.run(MultilingualEffects),
-    // EffectsModule.run(DirectoryEffects)
   ],
   declarations: [
     APP_COMPONENTS

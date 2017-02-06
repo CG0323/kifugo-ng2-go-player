@@ -37,10 +37,6 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromMultilingual from '../../i18n/index';
-import { IMultilingualState } from '../../i18n/index';
-import * as fromSample from '../../sample/index';
-import { ISampleState } from '../../sample/index';
 import * as fromKifuGo from '../../kifugo/index';
 import { IKifuState, IBoardState } from '../../kifugo/index';
 
@@ -49,8 +45,6 @@ import { IKifuState, IBoardState } from '../../kifugo/index';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface IAppState {
-  // i18n: fromMultilingual.IMultilingualState;
-  sample: fromSample.ISampleState;
   kifu: fromKifuGo.IKifuState;
   board: fromKifuGo.IBoardState;
 };
@@ -63,8 +57,6 @@ export interface IAppState {
  * the result from right to left.
  */
 const reducers = {
-  // i18n: fromMultilingual.reducer,
-  sample: fromSample.reducer,
   kifu: fromKifuGo.kifuReducer,
   board: fromKifuGo.boardReducer
 };
@@ -80,12 +72,6 @@ export function AppReducer(state: any, action: any) {
   }
 }
 
-// export function getMultilingualState(state$: Observable<IAppState>): Observable<IMultilingualState> {
-//   return state$.select(s => s.i18n);
-// }
-export function getNameListState(state$: Observable<IAppState>): Observable<ISampleState> {
-  return state$.select(s => s.sample);
-}
 export function getKifuState(state$: Observable<IAppState>): Observable<IKifuState> {
   return state$.select(s => s.kifu);
 }
@@ -93,8 +79,6 @@ export function getBoardState(state$: Observable<IAppState>): Observable<IBoardS
   return state$.select(s => s.board);
 }
 
-// export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
-export const getNames: any = compose(fromSample.getNames, getNameListState);
 export const getStatus: any = compose(fromKifuGo.getStatus, getBoardState);
 export const getBoardKifu: any = compose(fromKifuGo.getBoardKifu, getBoardState);
 export const getStones: any = compose(fromKifuGo.getStones, getBoardState);
