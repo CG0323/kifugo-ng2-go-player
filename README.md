@@ -227,11 +227,11 @@ constructor(private store: Store<IAppState>, private router: Router, private rou
 The go game board is drawn with HTML5 svg elements such as `path`, `rect`, `circle` and `gradient`
 ### Media query
 The app is aimed to be used on both desktop and mobile device.
-Different css is defined according to Media query.
-In desktop browser:  
+Different css is defined according to Media query.  
+**In desktop browser**:  
 ![desktop](images/desktop.gif)
 
-In mobile browser (iphone 6 plus):  
+**In mobile browser (iphone 6 plus)**:  
 ![desktop](images/mobile.gif)
 ## License
 MIT
