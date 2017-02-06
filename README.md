@@ -1,10 +1,9 @@
 Kifugo is an online go game kifu respository and kifu player.
-It is an Angular2 app based on Nathan Walker's [angular-seed_advanced](https://github.com/NathanWalker/angular-seed-advanced).
-The backend of this app is at [kifugo-backend](https://github.com/CG0323/kifugo-backend), which is Node.js + Mongodb Rest API.
+It is an **Angular2** app based on Nathan Walker's [angular-seed_advanced](https://github.com/NathanWalker/angular-seed-advanced).
+The backend of this app is at [kifugo-backend](https://github.com/CG0323/kifugo-backend), which is **Node.js** + **Mongodb** Rest API.
 
 # Demo
-
-
+![Kifus](docs/kifu.gif)  ![Player](docs/player.gif)  
 
 
 #### Integration with:
