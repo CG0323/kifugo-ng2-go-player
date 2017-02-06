@@ -3,7 +3,7 @@ It is an **Angular2** app based on Nathan Walker's [angular-seed_advanced](https
 The backend of this app is at [kifugo-backend](https://github.com/CG0323/kifugo-backend), which is **Node.js** + **Mongodb** Rest API.
 
 # Demo
-![Kifus](docs/kifu.gif)  ![Player](docs/player.gif)  
+![Kifus](images/kifu.gif)  ![Player](images/player.gif)  
 
 
 #### Integration with:
