@@ -83,6 +83,7 @@ export class KifuComponent implements OnInit {
             return false;
         }
     }
+
 }
 
 

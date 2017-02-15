@@ -48,7 +48,6 @@ export class PlayerComponent {
       this.store.dispatch(new playerAction.PrevAction());
     }
   goBack(){
-      console.log(this.location);
       this.location.back();
   }
 }
